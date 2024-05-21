@@ -1,8 +1,7 @@
 import { create } from "zustand"
 
 const useData = create(() => ({
-  mainArticle: '',
-  fetch: 'idle',
+  fetchState: null,
 }))
 
 export default useData
