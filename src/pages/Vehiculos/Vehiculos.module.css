@@ -1,8 +1,8 @@
 .main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 30px;
+  overflow: hidden;
   padding: 30px;
   height: 100%;
-  gap: 30px;
-  overflow-y: auto;
 }

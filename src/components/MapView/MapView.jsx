@@ -5,11 +5,12 @@ const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 const MapView = () => (
   <APIProvider apiKey={API_KEY}>
     <Map
-      style={{width: '100vw', height: '100vh'}}
-      defaultCenter={{lat: -9.485422247461349, lng: -75.3989033654179}}
-      defaultZoom={6}
+      style={{ width: '100%', height: '100%' }}
+      defaultCenter={{lat: -12.022547226140922, lng: -76.98634892523226}}
+      defaultZoom={11}
       gestureHandling={'greedy'}
       disableDefaultUI={true}
+      onClick={(e) => console.log(e)}
     />
   </APIProvider>
 )

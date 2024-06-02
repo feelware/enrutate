@@ -2,7 +2,6 @@ import { Center, Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
 import {
   IconRoute,
   IconTruck,
-  IconBuildingStore,
   IconUser,
   IconLogout,
 } from '@tabler/icons-react';
@@ -27,14 +26,9 @@ const pages = [
     label: 'Planes recientes'
   },
   { 
-    icon: IconBuildingStore,
-    location: '/almacen',
-    label: 'Mi almacén' 
-  },
-  { 
     icon: IconTruck,
-    location: '/vehiculos',
-    label: 'Mis vehículos' 
+    location: '/almacen',
+    label: 'Almacén y flota' 
   }
 ];
 

@@ -2,15 +2,23 @@ import { useState, useEffect } from "react"
 import { Flex, TextInput } from '@mantine/core';
 import { useLocation } from "wouter"
 import { PlanCard } from "../../components/PlanCard/PlanCard"
-import mockuser from '../../assets/mockuser'
+import users from '../../services/users'
 import classes from './Planes.module.css'
 
 const Planes = () => {
+  const [plans, setPlans] = useState([])
   const [, setLocation] = useLocation()
   const [filter, setFilter] = useState('')
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setLocation('/planes'), [])
+  useEffect(() => {
+    const fetchPlans = async () => {
+      const plans = await users.getPlans()
+      setPlans(plans)
+    }
+    fetchPlans()
+    setLocation('/planes')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={classes.main}>
@@ -23,7 +31,7 @@ const Planes = () => {
       />
       <Flex wrap="wrap" gap="md">
         {
-          mockuser.plans
+          plans
           .filter((plan) => plan.name.toLowerCase().includes(filter.toLowerCase()))
           .map((plan) => (
             <PlanCard
