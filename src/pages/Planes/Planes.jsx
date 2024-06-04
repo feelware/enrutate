@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react"
-import { Flex, TextInput } from '@mantine/core';
+import { 
+  Flex,
+  TextInput,
+  Group,
+  Button
+} from '@mantine/core';
 import { useLocation } from "wouter"
 import { PlanCard } from "../../components/PlanCard/PlanCard"
 import users from '../../services/users'
@@ -22,13 +27,18 @@ const Planes = () => {
 
   return (
     <div className={classes.main}>
-      <TextInput
-        value={filter}
-        style={{ width: 300 }}
-        onChange={(event) => setFilter(event.currentTarget.value)}
-        placeholder="Buscar plan"
-        className={classes.input}
-      />
+      <Group>
+        <TextInput
+          value={filter}
+          style={{ width: 300 }}
+          onChange={(event) => setFilter(event.currentTarget.value)}
+          placeholder="Buscar plan"
+          className={classes.input}
+        />
+        <Button>
+          Nuevo
+        </Button>
+      </Group>
       <Flex wrap="wrap" gap="md">
         {
           plans

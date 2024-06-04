@@ -1,10 +1,10 @@
 import users from "../../services/users"
 import CrudTable from "../../components/CrudTable/CrudTable"
-import MapView from '../../components/MapView'
+import MapView from '../../layout/MapView'
 import { useState, useEffect } from 'react'
-import classes from './Almacen.module.css'
+import classes from './Informacion.module.css'
 
-const Almacen = () => {
+const Informacion = () => {
   const [products, setProducts] = useState([])
   const [vehicles, setVehicles] = useState([])
 
@@ -85,11 +85,10 @@ const Almacen = () => {
             height="30%"
             flex={1}
           />
-
         </div>
       </div>
     </div>
   )
 }
 
-export default Almacen
+export default Informacion

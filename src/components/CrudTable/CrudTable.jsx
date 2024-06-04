@@ -2,7 +2,6 @@ import {
   Table,
   TextInput, 
   ActionIcon,
-  Title,
   Group,
   Button,
 } from '@mantine/core'
@@ -63,19 +62,14 @@ const CrudTable = ({
         flex
       }}>
         <Group justify="space-between">
-          <Title align="center" order={5} weight={700} >
-            {entityName.charAt(0).toUpperCase() + entityName.slice(1) + 's'}
-          </Title>
-          <Group>
-            <TextInput
-              placeholder={`Buscar ${entityName}`}
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            />
-            <Button>
-              Nuevo
-            </Button>
-          </Group>
+          <TextInput
+            placeholder={`Buscar ${entityName}`}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          <Button>
+            Nuevo
+          </Button>
         </Group>
         <div className={classes.table}>
           <Table

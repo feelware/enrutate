@@ -1,0 +1,8 @@
+.navbar {
+  height: 100%;
+}
+
+.results {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+  height: 100%;
+}
