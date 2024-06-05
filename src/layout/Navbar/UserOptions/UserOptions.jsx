@@ -20,7 +20,7 @@ import classes from './UserOptions.module.css';
 
 const UserOptions = () => {
   const [, setUserMenuOpened] = useState(false);
-  const { userData } = useUserData()
+  const { user } = useUserData()
   const { navPadding } = useGUIStore()
 
   return (
@@ -42,11 +42,11 @@ const UserOptions = () => {
             />
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
-                {userData.name}
+                {user.name}
               </Text>
 
               <Text c="dimmed" size="xs">
-                {userData.email}
+                {user.email}
               </Text>
             </div>
             <IconChevronRight style={{ width: rem(14), height: rem(14) }} stroke={1.5} />

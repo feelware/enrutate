@@ -1,0 +1,98 @@
+Table users {
+  id key [primary key]
+  name text
+  username text
+  email text
+  depotId key
+}
+
+Table depots {
+  id key [primary key]
+  address text
+  lat number
+  lng number
+}
+
+Table products {
+  id key [primary key]
+  name text
+  unit_weight number
+  amount_available number
+  depotId key
+}
+
+Table vehicles {
+  id key [primary key]
+  name text
+  capacity number
+  instances number  
+  depotId key
+}
+
+Table plans {
+  id key [primary key]
+  name text
+  description text
+  start date
+  estimated_end date
+  userId key
+}
+
+Table routes {
+  id key [primary key]
+  vehicleId key
+  planId key
+}
+
+Table clients {
+  id key [primary key]
+  name text
+  address text
+  lat number
+  lng number
+  time_window_start number
+  time_window_end number
+}
+
+Table orders {
+  id key [primary key]
+  clientId key
+  productId key
+  amount_requested number
+}
+
+Table delivery {
+  id key [primary key]
+  routeId key
+  orderId key
+}
+
+// usuario tiene varios planes
+Ref: users.id < plans.userId
+
+// usuario tiene un solo almacen
+Ref: users.depotId - depots.id
+
+// almacen tiene varios productos
+Ref: depots.id < products.depotId
+
+// almacen tiene varios vehiculos
+Ref: depots.id < vehicles.depotId
+
+// plan tiene varias rutas
+Ref: plans.id < routes.planId
+
+// ruta es recorrida por un solo vehiculo
+Ref: routes.vehicleId - vehicles.id
+
+// cliente realiza varios pedidos
+Ref: clients.id < orders.clientId
+
+// producto es parte de varios pedidos
+Ref: products.id < orders.productId
+
+// entrega satisface un solo pedido
+Ref: orders.id - delivery.orderId
+
+// entrega se realiza en una sola ruta
+Ref: routes.id < delivery.routeId

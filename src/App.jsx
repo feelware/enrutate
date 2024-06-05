@@ -23,41 +23,45 @@ const App = () => {
     desktopNavOpened,
   } = useGUIStore()
 
-  const { 
+  const {
+    currentViewPlan,
     setCurrentViewPlan
   } = useProcessStore()
 
   const {
-    setUserData
+    setUser,
+    setPlans
   } = useUserData()
 
   useEffect(() => {
-    // const userId = '0'
-    // users.setCurrentUserId(userId)
-    const storedUser = localStorage.getItem('userData')
+    const storedUser = localStorage.getItem('user')
     if (storedUser) {
       console.log('User data found in local storage')
       const user = JSON.parse(storedUser)
       console.log({ user })
       users.setCurrentUser(user)
-      setUserData(user)
+      setUser(user)
     }
     else {
       console.log('No user data found in local storage')
       const saveUser = async () => {
         const mockUser = await users.getMockUser()
-        localStorage.setItem('userData', JSON.stringify(mockUser))
+        localStorage.setItem('user', JSON.stringify(mockUser))
         users.setCurrentUser(mockUser)
-        setUserData(mockUser)
+        setUser(mockUser)
       }
       saveUser()
     }
-    const fetchLatestPlan = async () => {
-      const latestPlan = await users.getLatestPlan()
-      setCurrentViewPlan(latestPlan)
+    const fetchPlans = async () => {
+      const plans = await users.getPlans()
+      setPlans(plans)
+      const currentPlan = plans[0]
+      setCurrentViewPlan({
+        ...currentPlan
+      })
     }
-    fetchLatestPlan()
-  }, [setUserData, setCurrentViewPlan])
+    fetchPlans()
+  }, [setUser, setPlans, setCurrentViewPlan])
 
   return (
     <AppShell
@@ -70,7 +74,7 @@ const App = () => {
       <NavOpenToggle />
 
       <AppShell.Navbar>
-        <Navbar />
+        {currentViewPlan && <Navbar />}
       </AppShell.Navbar>
       
       <AppShell.Main className={classes.main}>

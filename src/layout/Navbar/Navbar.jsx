@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Title,
   Text,
@@ -7,9 +6,9 @@ import {
   ScrollArea,
   NavLink,
   ActionIcon,
-  SegmentedControl,
   TextInput,
   Center,
+  Card,
   rem
 } from '@mantine/core'
 import {
@@ -32,8 +31,8 @@ import classes from './Navbar.module.css'
 const Navbar = () => {
   const { currentViewPlan } = useProcessStore()
   const { navPadding } = useGUIStore()
-  const [mode, setMode] = useState('rutas')
-  const [searching, setSearching] = useState(false)
+
+  console.log(currentViewPlan)
 
   const Option = ({ label, Icon, onClick }) => (
     <NavLink
@@ -63,75 +62,64 @@ const Navbar = () => {
     },
   ]
 
+  const RouteCard = ({ clients }) => {
+    console.log(clients)
+    if (!clients) return
+    return (
+      <Card>
+      {
+        clients.map((client, index) => (
+          <Text key={index}>
+            {client.client_name}
+            hola
+          </Text>
+        ))
+      }
+      </Card>
+    )
+  }
+
   return (
     <Stack justify="space-between" className={classes.navbar}>
       <Stack gap={5} pr={navPadding} pl={navPadding} pt={75}>
         <Title order={3}>{currentViewPlan.name}</Title>
-        <ScrollArea mb={20} h={20}>
-          <Text size="xs" c="dimmed">
+        <ScrollArea mb={10} h={20}>
+          <Text size="xs" >
             {currentViewPlan.description}
           </Text>
         </ScrollArea>
       </Stack>
-      <Stack gap={12} style={{ height: '100%' }}>
-        <Group px={navPadding} h={32} gap={0} justify="space-between">
-          {
-            searching
-            ? (
-              <TextInput 
-                placeholder={`Buscar ${mode}`}
-              />
-            )
-            : (
-              <SegmentedControl
-                data={[
-                  { 
-                    value: 'rutas',
-                    label: (
-                      <Center px={4} py={2.5} style={{ gap: 5 }}>
-                        <IconRoute style={{ width: rem(16), height: rem(16) }} />
-                        <span>Rutas</span>
-                      </Center>
-                    ) 
-                  },
-                  { 
-                    value: 'clientes',
-                    label: (
-                      <Center px={4} py={2.5} style={{ gap: 5 }}>
-                        <IconUsers style={{ width: rem(16), height: rem(16) }} />
-                        <span>Clientes</span>
-                      </Center>
-                    ) 
-                  },
-                ]}
-                value={mode}
-                onChange={setMode}
-                size="xs"
-              />
-            )
-          }
-          <ActionIcon 
-            variant="transparent"
-            c="gray"
-            onClick={() => setSearching(!searching)}
-          >
-          {
-            searching
-            ? <IconX 
-              size={rem(18)}
-              stroke={1.5}
-            />
-            : <IconSearch
-              size={rem(18)}
-              stroke={1.5}
-            />
-          }
-          </ActionIcon>
-        </Group>
+      <Stack gap={2} style={{ height: '100%' }}>
+        <TextInput
+          pl={rem(13)}
+          placeholder={'Buscar rutas'}
+          style={{ width: '100%' }}
+          leftSection={<IconSearch size={rem(13)} />}
+          styles={{
+            input: {
+              borderRadius: 0,
+              border: 'none',
+              fontSize: rem(12),
+              paddingRight: navPadding,
+              paddingLeft: navPadding + 10,
+              backgroundColor: 'transparent',
+            }
+          }}
+        />
         <ScrollArea className={classes.results}>
-        {
-          
-        }
+          {/* <Stack>
+          {
+            (mode === 'rutas')
+            && (
+              currentViewPlan?.routes?.map((route, index) => {
+                console.log(route)
+                return (
+                  <RouteCard key={index} {...route} />
+                )
+              })
+            )
+          }
+          </Stack> */}
         </ScrollArea>
       </Stack>
       <Stack gap={0}>

@@ -3,20 +3,17 @@
     {
       "id": "0",
       "name": "Benjalact",
+      "username": "benjalact_pe",
       "email": "logistica@benjalact.com",
-      "depotId": "0",
-      "vehicleId": ["0", "1", "2", "3", "4"],
-      "planId": ["0"]
+      "depotId": "0"
     }
   ],
   "depots": [
     {
       "id": "0",
-      "userId": "0",
       "address": "Calle 123",
       "lat": -12.022547226140922,
-      "lng": -76.98634892523226,
-      "productId": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      "lng": -76.98634892523226
     }
   ],
   "products": [
@@ -24,61 +21,71 @@
       "id": "0",
       "name": "Six-pack de leche entera",
       "unit_weight": 3.2,
-      "amount": 10 
+      "available_amount": 1,
+      "depotId": "0"
     },
     { 
       "id": "1",
       "name": "Queso fresco",
       "unit_weight": 0,
-      "amount": 28 
+      "available_amount": 28,
+      "depotId": "0"
     },
     { 
       "id": "2",
       "name": "Botella de yogurt de 1L",
       "unit_weight": 1,
-      "amount": 20 
+      "available_amount": 20,
+      "depotId": "0"
     },
     { 
       "id": "3",
       "name": "Botella de yogurt de 500ml",
       "unit_weight": 0.5,
-      "amount": 30 
+      "available_amount": 30,
+      "depotId": "0"
     },
     { 
       "id": "4",
       "name": "Botella de yogurt de 250ml",
       "unit_weight": 0.25,
-      "amount": 40 
+      "available_amount": 40,
+      "depotId": "0"
     },
     { 
       "id": "5",
       "name": "Barra de manteca",
       "unit_weight": 0.5,
-      "amount": 20 
+      "available_amount": 20,
+      "depotId": "0"
     },
     { 
       "id": "6",
       "name": "Queso fresco",
       "unit_weight": 0,
-      "amount": 30 
+      "available_amount": 30,
+      "depotId": "0"
     },
     { 
       "id": "7",
       "name": "Queso mantecoso",
       "unit_weight": 0,
-      "amount": 24 
+      "available_amount": 24,
+      "depotId": "0"
     },
     { 
       "id": "8",
       "name": "Queso andino",
       "unit_weight": 0,
-      "amount": 23 
+      "available_amount": 23,
+      "depotId": "0"
     },
     { 
       "id": "9",
       "name": "Bolsa de crema de leche de 1L",
       "unit_weight": 1,
-      "amount": 17 
+      "available_amount": 17,
+      "depotId": "0"
     }
   ],
   "vehicles": [
@@ -86,407 +93,405 @@
       "id": "0",
       "name": "Camioneta",
       "capacity": 1000,
-      "instances": 4 
+      "instances": 4,
+      "depotId": "0"
     },
     { 
       "id": "1",
       "name": "Camión",
       "capacity": 2000,
-      "instances": 3 
+      "instances": 3,
+      "depotId": "0" 
     },
     { 
       "id": "2",
       "name": "Motocicleta",
       "capacity": 100,
-      "instances": 8 
+      "instances": 8,
+      "depotId": "0" 
     },
     { 
       "id": "3",
       "name": "Furgoneta",
       "capacity": 500,
-      "instances": 6 
+      "instances": 6,
+      "depotId": "0" 
     },
     { 
       "id": "4",
       "name": "Mototaxi",
       "capacity": 50,
-      "instances": 10 
+      "instances": 10,
+      "depotId": "0" 
     }
   ],
   "plans": [
     {
       "id": "0",
-      "userId": "0",
       "name": "Entrega de quesos",
       "description": "Entrega de quesos en Chorrillos y Surco",
       "start": "2023-09-01T08:00:00",
       "estimated_end": "2023-09-01T12:00:00",
-      "total_routes": 3,
-      "total_clients": 8,
-      "routes": [
-        {
-          "vehicleId": "0",
-          "clients": [
-            {
-              "client_name": "Tienda de quesos 'El Chato'",
-              "client_address": "Av. Los Pinos 123",
-              "client_lat": -12.02254743346427,
-              "client_lng": -76.98633824628646,
-              "products_requested": [
-                {
-                  "productId": "1",
-                  "amount_requested": 5
-                },
-                {
-                  "productId": "6",
-                  "amount_requested": 6
-                },
-                {
-                  "productId": "7",
-                  "amount_requested": 3
-                }
-              ]
-            },
-            {
-              "client_name": "Panadería La Espiga Dorada",
-              "client_address": "Jr. Las Flores 456",
-              "client_lat": -12.03335789210478,
-              "client_lng": -76.97924270002305,
-              "products_requested": [
-                {
-                  "productId": "2",
-                  "amount_requested": 2
-                },
-                {
-                  "productId": "4",
-                  "amount_requested": 8
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 1
-                }
-              ]
-            },
-            {
-              "client_name": "Bodega 'La esquina'",
-              "client_address": "Calle Libertad 789",
-              "client_lat": -12.01123478908523,
-              "client_lng": -76.99275420198472,
-              "products_requested": [
-                {
-                  "productId": "3",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "8",
-                  "amount_requested": 2
-                },
-                {
-                  "productId": "9",
-                  "amount_requested": 1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "vehicleId": "0",
-          "clients": [
-            {
-              "client_name": "Cafetería Aroma Intenso",
-              "client_address": "Av. Universitaria 321",
-              "client_lat": -12.00543289082154,
-              "client_lng": -77.00124750922734,
-              "products_requested": [
-                {
-                  "productId": "1",
-                  "amount_requested": 3
-                },
-                {
-                  "productId": "6",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 2
-                }
-              ]
-            },
-            {
-              "client_name": "Panadería 'El horno'",
-              "client_address": "Jr. Los Girasoles 654",
-              "client_lat": -12.02254743346452,
-              "client_lng": -76.98633824628676,
-              "products_requested": [
-                {
-                  "productId": "2",
-                  "amount_requested": 3
-                },
-                {
-                  "productId": "4",
-                  "amount_requested": 7
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 3
-                }
-              ]
-            },
-            {
-              "client_name": "Bodega 'El rincón'",
-              "client_address": "Calle La Paz 987",
-              "client_lat": -12.01123478908343,
-              "client_lng": -76.99275420198547,
-              "products_requested": [
-                {
-                  "productId": "3",
-                  "amount_requested": 5
-                },
-                {
-                  "productId": "8",
-                  "amount_requested": 3
-                },
-                {
-                  "productId": "9",
-                  "amount_requested": 2
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "vehicleId": "1",
-          "clients": [
-            {
-              "client_name": "Abarrotes 'Tía Rosa'",
-              "client_address": "Av. Los Pinos 100",
-              "client_lat": -12.02254743434527,
-              "client_lng": -76.98633824654466,
-              "products_requested": [
-                {
-                  "productId": "3",
-                  "amount_requested": 6
-                },
-                {
-                  "productId": "8",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "9",
-                  "amount_requested": 3
-                }
-              ]
-            },
-            {
-              "client_name": "Pastelería 'El dulce'",
-              "client_address": "Jr. Las Flores 200",
-              "client_lat": -12.03335789254578,
-              "client_lng": -76.97924270002305,
-              "products_requested": [
-                {
-                  "productId": "2",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "4",
-                  "amount_requested": 6
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 4
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "userId": "0" 
+    }
+  ],
+  "routes": [
+    {
+      "id": "0",
+      "vehicleId": "0",
+      "planId": "0"
     },
     {
       "id": "1",
-      "userId": "0",
-      "name": "Entrega de quesos",
-      "description": "Entrega de quesos en Chorrillos y Surco",
-      "start": "2023-09-01T08:00:00",
-      "estimated_end": "2023-09-01T12:00:00",
-      "total_routes": 3,
-      "total_clients": 8,
-      "routes": [
-        {
-          "vehicleId": "0",
-          "clients": [
-            {
-              "client_name": "Tienda de quesos 'El Chato'",
-              "client_address": "Av. Los Pinos 123",
-              "client_lat": -12.02254743346427,
-              "client_lng": -76.98633824628646,
-              "products_requested": [
-                {
-                  "productId": "1",
-                  "amount_requested": 5
-                },
-                {
-                  "productId": "6",
-                  "amount_requested": 6
-                },
-                {
-                  "productId": "7",
-                  "amount_requested": 3
-                }
-              ]
-            },
-            {
-              "client_name": "Panadería La Espiga Dorada",
-              "client_address": "Jr. Las Flores 456",
-              "client_lat": -12.03335789210478,
-              "client_lng": -76.97924270002305,
-              "products_requested": [
-                {
-                  "productId": "2",
-                  "amount_requested": 2
-                },
-                {
-                  "productId": "4",
-                  "amount_requested": 8
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 1
-                }
-              ]
-            },
-            {
-              "client_name": "Bodega 'La esquina'",
-              "client_address": "Calle Libertad 789",
-              "client_lat": -12.01123478908523,
-              "client_lng": -76.99275420198472,
-              "products_requested": [
-                {
-                  "productId": "3",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "8",
-                  "amount_requested": 2
-                },
-                {
-                  "productId": "9",
-                  "amount_requested": 1
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "vehicleId": "0",
-          "clients": [
-            {
-              "client_name": "Cafetería Aroma Intenso",
-              "client_address": "Av. Universitaria 321",
-              "client_lat": -12.00543289082154,
-              "client_lng": -77.00124750922734,
-              "products_requested": [
-                {
-                  "productId": "1",
-                  "amount_requested": 3
-                },
-                {
-                  "productId": "6",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 2
-                }
-              ]
-            },
-            {
-              "client_name": "Panadería 'El horno'",
-              "client_address": "Jr. Los Girasoles 654",
-              "client_lat": -12.02254743346452,
-              "client_lng": -76.98633824628676,
-              "products_requested": [
-                {
-                  "productId": "2",
-                  "amount_requested": 3
-                },
-                {
-                  "productId": "4",
-                  "amount_requested": 7
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 3
-                }
-              ]
-            },
-            {
-              "client_name": "Bodega 'El rincón'",
-              "client_address": "Calle La Paz 987",
-              "client_lat": -12.01123478908343,
-              "client_lng": -76.99275420198547,
-              "products_requested": [
-                {
-                  "productId": "3",
-                  "amount_requested": 5
-                },
-                {
-                  "productId": "8",
-                  "amount_requested": 3
-                },
-                {
-                  "productId": "9",
-                  "amount_requested": 2
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "vehicleId": "1",
-          "clients": [
-            {
-              "client_name": "Abarrotes 'Tía Rosa'",
-              "client_address": "Av. Los Pinos 100",
-              "client_lat": -12.02254743434527,
-              "client_lng": -76.98633824654466,
-              "products_requested": [
-                {
-                  "productId": "3",
-                  "amount_requested": 6
-                },
-                {
-                  "productId": "8",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "9",
-                  "amount_requested": 3
-                }
-              ]
-            },
-            {
-              "client_name": "Pastelería 'El dulce'",
-              "client_address": "Jr. Las Flores 200",
-              "client_lat": -12.03335789254578,
-              "client_lng": -76.97924270002305,
-              "products_requested": [
-                {
-                  "productId": "2",
-                  "amount_requested": 4
-                },
-                {
-                  "productId": "4",
-                  "amount_requested": 6
-                },
-                {
-                  "productId": "5",
-                  "amount_requested": 4
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "vehicleId": "0",
+      "planId": "0"
+    },
+    {
+      "id": "2",
+      "vehicleId": "1",
+      "planId": "0"
+    }
+  ],
+  "clients": [
+    {
+      "id": "0",
+      "name": "Tienda de quesos 'El Chato'",
+      "address": "Av. Los Pinos 123",
+      "lat": -12.02254743346427,
+      "lng": -76.98633824628646,
+      "time_window_start": 8,
+      "time_window_end": 20
+    },
+    {
+      "id": "1",
+      "name": "Panadería La Espiga Dorada",
+      "address": "Jr. Las Flores 456",
+      "lat": -12.03335789210478,
+      "lng": -76.97924270002305,
+      "time_window_start": 8,
+      "time_window_end": 16
+    },
+    {
+      "id": "2",
+      "name": "Bodega 'La esquina'",
+      "address": "Calle Libertad 789",
+      "lat": -12.01123478908523,
+      "lng": -76.99275420198472,
+      "time_window_start": 10,
+      "time_window_end": 16
+    },
+    {
+      "id": "3",
+      "name": "Cafetería Aroma Intenso",
+      "address": "Av. Universitaria 321",
+      "lat": -12.00543289082154,
+      "lng": -77.00124750922734,
+      "time_window_start": 7,
+      "time_window_end": 16
+    },
+    {
+      "id": "4",
+      "name": "Panadería 'El horno'",
+      "address": "Jr. Los Girasoles 654",
+      "lat": -12.02254743346452,
+      "lng": -76.98633824628676,
+      "time_window_start": 8,
+      "time_window_end": 20
+    },
+    {
+      "id": "5",
+      "name": "Bodega 'El rincón'",
+      "address": "Calle La Paz 987",
+      "lat": -12.01123478908343,
+      "lng": -76.99275420198547,
+      "time_window_start": 10,
+      "time_window_end": 20
+    },
+    {
+      "id": "6",
+      "name": "Abarrotes 'Tía Rosa'",
+      "address": "Av. Los Pinos 100",
+      "lat": -12.02254743434527,
+      "lng": -76.98633824654466,
+      "time_window_start": 7,
+      "time_window_end": 21
+    },
+    {
+      "id": "7",
+      "name": "Pastelería 'El dulce'",
+      "address": "Jr. Las Flores 200",
+      "lat": -12.03335789254578,
+      "lng": -76.97924270002305,
+      "time_window_start": 7,
+      "time_window_end": 21
+    }
+  ],
+  "orders": [
+    {
+      "id": "0",
+      "clientId": "0",
+      "productId": "1",
+      "requested_amount": 5
+    },
+    {
+      "id": "1",
+      "clientId": "0",
+      "productId": "6",
+      "requested_amount": 6
+    },
+    {
+      "id": "2",
+      "clientId": "1",
+      "productId": "7",
+      "requested_amount": 3
+    },
+    {
+      "id": "3",
+      "clientId": "1",
+      "productId": "2",
+      "requested_amount": 2
+    },
+    {
+      "id": "4",
+      "clientId": "1",
+      "productId": "4",
+      "requested_amount": 8
+    },
+    {
+      "id": "5",
+      "clientId": "1",
+      "productId": "5",
+      "requested_amount": 1
+    },
+    {
+      "id": "6",
+      "clientId": "2",
+      "productId": "3",
+      "requested_amount": 4
+    },
+    {
+      "id": "7",
+      "clientId": "2",
+      "productId": "8",
+      "requested_amount": 2
+    },
+    {
+      "id": "8",
+      "clientId": "3",
+      "productId": "9",
+      "requested_amount": 1
+    },
+    {
+      "id": "9",
+      "clientId": "3",
+      "productId": "1",
+      "requested_amount": 3
+    },
+    {
+      "id": "10",
+      "clientId": "4",
+      "productId": "6",
+      "requested_amount": 4
+    },
+    {
+      "id": "11",
+      "clientId": "4",
+      "productId": "5",
+      "requested_amount": 2
+    },
+    {
+      "id": "12",
+      "clientId": "4",
+      "productId": "2",
+      "requested_amount": 3
+    },
+    {
+      "id": "13",
+      "clientId": "5",
+      "productId": "4",
+      "requested_amount": 7
+    },
+    {
+      "id": "14",
+      "clientId": "5",
+      "productId": "5",
+      "requested_amount": 3
+    },
+    {
+      "id": "15",
+      "clientId": "5",
+      "productId": "3",
+      "requested_amount": 5
+    },
+    {
+      "id": "16",
+      "clientId": "6",
+      "productId": "8",
+      "requested_amount": 3
+    },
+    {
+      "id": "17",
+      "clientId": "6",
+      "productId": "9",
+      "requested_amount": 2
+    },
+    {
+      "id": "18",
+      "clientId": "6",
+      "productId": "3",
+      "requested_amount": 6
+    },
+    {
+      "id": "19",
+      "clientId": "7",
+      "productId": "8",
+      "requested_amount": 4
+    },
+    {
+      "id": "20",
+      "clientId": "7",
+      "productId": "9",
+      "requested_amount": 3
+    },
+    {
+      "id": "21",
+      "clientId": "7",
+      "productId": "2",
+      "requested_amount": 4
+    },
+    {
+      "id": "22",
+      "clientId": "7",
+      "productId": "4",
+      "requested_amount": 6
+    },
+    {
+      "id": "23",
+      "clientId": "7",
+      "productId": "5",
+      "requested_amount": 4
+    }
+  ],
+  "deliveries": [
+    {
+      "id": "0",
+      "orderId": "0",
+      "routeId": "0"
+    },
+    {
+      "id": "1",
+      "orderId": "1",
+      "routeId": "0"
+    },
+    {
+      "id": "2",
+      "orderId": "2",
+      "routeId": "1"
+    },
+    {
+      "id": "3",
+      "orderId": "3",
+      "routeId": "1"
+    },
+    {
+      "id": "4",
+      "orderId": "4",
+      "routeId": "1"
+    },
+    {
+      "id": "5",
+      "orderId": "5",
+      "routeId": "1"
+    },
+    {
+      "id": "6",
+      "orderId": "6",
+      "routeId": "2"
+    },
+    {
+      "id": "7",
+      "orderId": "7",
+      "routeId": "2"
+    },
+    {
+      "id": "8",
+      "orderId": "8",
+      "routeId": "3"
+    },
+    {
+      "id": "9",
+      "orderId": "9",
+      "routeId": "3"
+    },
+    {
+      "id": "10",
+      "orderId": "10",
+      "routeId": "3"
+    },
+    {
+      "id": "11",
+      "orderId": "11",
+      "routeId": "3"
+    },
+    {
+      "id": "12",
+      "orderId": "12",
+      "routeId": "4"
+    },
+    {
+      "id": "13",
+      "orderId": "13",
+      "routeId": "4"
+    },
+    {
+      "id": "14",
+      "orderId": "14",
+      "routeId": "4"
+    },
+    {
+      "id": "15",
+      "orderId": "15",
+      "routeId": "5"
+    },
+    {
+      "id": "16",
+      "orderId": "16",
+      "routeId": "5"
+    },
+    {
+      "id": "17",
+      "orderId": "17",
+      "routeId": "5"
+    },
+    {
+      "id": "18",
+      "orderId": "18",
+      "routeId": "6"
+    },
+    {
+      "id": "19",
+      "orderId": "19",
+      "routeId": "6"
+    },
+    {
+      "id": "20",
+      "orderId": "20",
+      "routeId": "7"
+    },
+    {
+      "id": "21",
+      "orderId": "21",
+      "routeId": "7"
+    },
+    {
+      "id": "22",
+      "orderId": "22",
+      "routeId": "7"
+    },
+    {
+      "id": "23",
+      "orderId": "23",
+      "routeId": "7"
     }
   ]
 }

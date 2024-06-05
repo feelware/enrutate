@@ -37,22 +37,27 @@ const getVehicles = async () => {
 */
 
 const getMockUser = async() => {
-  const res = await axios.get(`${baseUrl}/users?_start=0&_end=1`)
+  const res = await axios.get(`${baseUrl}/users/0`)
   return res.data[0]
 }
 
-const getLatestPlan = async () => {
-  const res = await axios.get(`${baseUrl}/plans?_user=${currentUser.id}?_start=0&_end=1`)
-  return res.data[0]
+const getPlans = async () => {
+  const res = await axios.get(`${baseUrl}/plans?userId=${currentUser.id}`)
+  return res.data
+}
+
+const extendPlan = async (planId) => {
+  const clients = []
+  const routes = await axios.get(`${baseUrl}/routes?planId=${planId}`)
+  
 }
 
 export default {
-  // getPlans,
+  getPlans,
   // getDepot,
   // editProduct,
   // delProduct,
   // getVehicles,
   setCurrentUser,
-  getMockUser,
-  getLatestPlan
+  getMockUser
 }
