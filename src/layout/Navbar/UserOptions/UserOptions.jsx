@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useUserData from '../../../store/useUserData'
+import useUserStore from '../../../store/useUserStore'
 import {
   // Avatar,
   Avatar,
@@ -20,14 +20,14 @@ import classes from './UserOptions.module.css';
 
 const UserOptions = () => {
   const [, setUserMenuOpened] = useState(false);
-  const { user } = useUserData()
+  const { user } = useUserStore()
   const { navPadding } = useGUIStore()
 
   return (
     <Menu
       width={200}
       position="right"
-      transitionProps={{ transition: 'fade-right' }}
+      transitionProps={{ transition: 'fade' }}
       onClose={() => setUserMenuOpened(false)}
       onOpen={() => setUserMenuOpened(true)}
       withinPortal

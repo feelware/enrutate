@@ -2,26 +2,24 @@ import {
   Title,
   Text,
   Stack,
-  Group,
   ScrollArea,
-  NavLink,
-  ActionIcon,
+  Button,
   TextInput,
-  Center,
-  Card,
   rem
 } from '@mantine/core'
+
+import { useScrollIntoView } from '@mantine/hooks'
+
 import {
   IconDownload,
   IconShare,
-  IconArrowLeft,
-  IconSearch,
-  IconRoute,
-  IconUsers,
-  IconX
+  IconHome,
+  IconSearch
 } from '@tabler/icons-react'
 
-import UserOptions from './UserOptions/';
+import UserOptions from './UserOptions/'
+
+import RouteCard from './RouteCard' 
 
 import useProcessStore from '../../store/useProcessStore'
 import useGUIStore from '../../store/useGUIStore'
@@ -29,19 +27,22 @@ import useGUIStore from '../../store/useGUIStore'
 import classes from './Navbar.module.css'
 
 const Navbar = () => {
-  const { currentViewPlan } = useProcessStore()
+  const { currentPlan } = useProcessStore()
   const { navPadding } = useGUIStore()
-
-  console.log(currentViewPlan)
+  const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView()
 
   const Option = ({ label, Icon, onClick }) => (
-    <NavLink
+    <Button
       pl={navPadding}
       pr={navPadding}
-      label={<Text size={rem(13)}>{label}</Text>}
+      justify='left'
+      variant='subtle'
+      color='default'
       leftSection={<Icon size="1rem" stroke={1.5} />}
       onClick={onClick}
-    />
+    >
+      <Text size={rem(13)}>{label}</Text>
+    </Button>
   )
 
   const options = [
@@ -57,81 +58,70 @@ const Navbar = () => {
     },
     {
       label: 'Ver todos mis planes',
-      Icon: IconArrowLeft,
+      Icon: IconHome,
       onClick: () => console.log('Back')
     },
   ]
 
-  const RouteCard = ({ clients }) => {
-    console.log(clients)
-    if (!clients) return
-    return (
-      <Card>
-      {
-        clients.map((client, index) => (
-          <Text key={index}>
-            {client.client_name}
-            hola
-          </Text>
-        ))
-      }
-      </Card>
-    )
-  }
-
   return (
     <Stack justify="space-between" className={classes.navbar}>
-      <Stack gap={5} pr={navPadding} pl={navPadding} pt={75}>
-        <Title order={3}>{currentViewPlan.name}</Title>
-        <ScrollArea mb={10} h={20}>
-          <Text size="xs" >
-            {currentViewPlan.description}
-          </Text>
-        </ScrollArea>
-      </Stack>
-      <Stack gap={2} style={{ height: '100%' }}>
-        <TextInput
-          pl={rem(13)}
-          placeholder={'Buscar rutas'}
-          style={{ width: '100%' }}
-          leftSection={<IconSearch size={rem(13)} />}
-          styles={{
-            input: {
-              borderRadius: 0,
-              border: 'none',
-              fontSize: rem(12),
-              paddingRight: navPadding,
-              paddingLeft: navPadding + 10,
-              backgroundColor: 'transparent',
-            }
-          }}
-        />
-        <ScrollArea className={classes.results}>
-          {/* <Stack>
-          {
-            (mode === 'rutas')
-            && (
-              currentViewPlan?.routes?.map((route, index) => {
-                console.log(route)
+    {
+      currentPlan && <>
+        <Stack gap={5} pr={navPadding} pl={navPadding} pt={75}>
+          <Title order={3}>{currentPlan.name}</Title>
+          <ScrollArea mb={10} h={20}>
+            <Text size="xs" >
+              {currentPlan.description}
+            </Text>
+          </ScrollArea>
+        </Stack>
+        <Stack gap={2} style={{ height: '100%' }}>
+          <TextInput
+            pl={rem(13)}
+            placeholder={'Buscar rutas'}
+            style={{ width: '100%' }}
+            leftSection={<IconSearch size={rem(13)} />}
+            styles={{
+              input: {
+                borderRadius: 0,
+                border: 'none',
+                fontSize: rem(12),
+                paddingRight: navPadding,
+                paddingLeft: navPadding + 10,
+                backgroundColor: 'transparent',
+              }
+            }}
+          />
+          <ScrollArea className={classes.results}>
+            <Stack ref={scrollableRef} gap={12} my={12}>
+            {
+              currentPlan.routes?.map((route, index) => {
                 return (
-                  <RouteCard key={index} {...route} />
+                  <RouteCard 
+                    key={index}
+                    index={index}
+                    targetRef={targetRef}
+                    scrollIntoView={scrollIntoView}
+                    { ...route}
+                  />
                 )
               })
-            )
-          }
-          </Stack> */}
-        </ScrollArea>
-      </Stack>
-      <Stack gap={0}>
-        <Stack gap={0}>
-        {
-          options.map((option, index) => (
-            <Option key={index} {...option} />
-          ))
-        }
+            }
+            </Stack>
+          </ScrollArea>
         </Stack>
-        <UserOptions />
-      </Stack>
+        <Stack gap={0}>
+          <Stack gap={0}>
+          {
+            options.map((option, index) => (
+              <Option key={index} {...option} />
+            ))
+          }
+          </Stack>
+          <UserOptions />
+        </Stack>
+      </>
+    }
     </Stack>
   );
 }

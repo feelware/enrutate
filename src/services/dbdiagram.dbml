@@ -31,10 +31,14 @@ Table vehicles {
 
 Table plans {
   id key [primary key]
+  created date
   name text
   description text
   start date
   estimated_end date
+  total_clients number
+  total_orders number
+  total_routes number
   userId key
 }
 
@@ -56,15 +60,15 @@ Table clients {
 
 Table orders {
   id key [primary key]
-  clientId key
+  waypointId key
   productId key
   amount_requested number
 }
 
-Table delivery {
+Table waypoints {
   id key [primary key]
+  clientId key
   routeId key
-  orderId key
 }
 
 // usuario tiene varios planes
@@ -82,17 +86,18 @@ Ref: depots.id < vehicles.depotId
 // plan tiene varias rutas
 Ref: plans.id < routes.planId
 
-// ruta es recorrida por un solo vehiculo
-Ref: routes.vehicleId - vehicles.id
+// ruta tiene varios puntos de entrega
+Ref: routes.id < waypoints.routeId
 
-// cliente realiza varios pedidos
-Ref: clients.id < orders.clientId
+// en cada punto de entrega 
+// se entregan varios pedidos
+Ref: waypoints.id < orders.waypointId
 
 // producto es parte de varios pedidos
 Ref: products.id < orders.productId
 
-// entrega satisface un solo pedido
-Ref: orders.id - delivery.orderId
+// cliente se ubica en un solo punto de entrega
+Ref: clients.id - waypoints.clientId
 
-// entrega se realiza en una sola ruta
-Ref: routes.id < delivery.routeId
+// ruta es recorrida por un solo vehiculo
+Ref: routes.vehicleId - vehicles.id

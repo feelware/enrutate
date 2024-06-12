@@ -1,11 +1,14 @@
 import { create } from "zustand"
 
 const useProcessStore = create((set) => ({
-  currentProcess: 'view',
-  setCurrentProcess: (currentProcess) => set({ currentProcess }),
+  isViewing: true,
+  setIsViewing: (isViewing) => set(({ isViewing })),
 
-  currentViewPlan: {},
-  setCurrentViewPlan: (currentViewPlan) => set({ currentViewPlan }),
+  currentPlan: null,
+  setCurrentPlan: (currentPlan) => set({ currentPlan }),
+
+  newPlan: null,
+  setNewPlan: (newPlan) => set({ newPlan }),
 }))
 
 export default useProcessStore

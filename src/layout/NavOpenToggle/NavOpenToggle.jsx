@@ -6,21 +6,32 @@ import {
 import {
   IconMenu2
 } from '@tabler/icons-react'
+
 import useGUIStore from '../../store/useGUIStore'
 
 const NavOpenToggle = () => { 
   const {
-    toggleDesktopNav,
-    toggleMobileNav,
+    mobileNavOpened,
+    setMobileNavOpened,
+    desktopNavOpened,
+    setDesktopNavOpened,
     navPadding
   } = useGUIStore()
 
   return (
     <Affix position={{ top: navPadding, left: navPadding }}>
-      <ActionIcon hiddenFrom="sm" onClick={toggleMobileNav} variant="default">
+      <ActionIcon
+        hiddenFrom="sm"
+        onClick={() => setMobileNavOpened(!mobileNavOpened)}
+        variant="default"
+      >
         <IconMenu2 size={rem(15)}/>
       </ActionIcon>
-      <ActionIcon visibleFrom="sm" onClick={toggleDesktopNav} variant="default">
+      <ActionIcon 
+        visibleFrom="sm"
+        onClick={() => setDesktopNavOpened(!desktopNavOpened)} 
+        variant="default"
+      >
         <IconMenu2 size={rem(15)}/>
       </ActionIcon>
     </Affix>

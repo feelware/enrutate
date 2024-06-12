@@ -4,11 +4,13 @@ import {
 
 import useGUIStore from './store/useGUIStore';
 import useProcessStore from './store/useProcessStore';
-import useUserData from './store/useUserData';
+import useUserStore from './store/useUserStore';
 
 import Navbar from './layout/Navbar/';
-import NavOpenToggle from './layout/NavOpenToggle/'
+import NavOpenToggle from './layout/NavOpenToggle'
+import NewButton from './layout/NewButton';
 import MapView from './layout/MapView'
+import Aside from './layout/Aside';
 
 // import ThemeToggle from './layout/ThemeToggle'
 
@@ -21,65 +23,85 @@ const App = () => {
   const { 
     mobileNavOpened,
     desktopNavOpened,
+    toggleDesktopNav,
   } = useGUIStore()
 
   const {
-    currentViewPlan,
-    setCurrentViewPlan
+    isViewing,
+    setCurrentPlan
   } = useProcessStore()
 
   const {
     setUser,
-    setPlans
-  } = useUserData()
+    setPlans,
+    setDepot
+  } = useUserStore()
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user')
     if (storedUser) {
-      console.log('User data found in local storage')
       const user = JSON.parse(storedUser)
-      console.log({ user })
       users.setCurrentUser(user)
       setUser(user)
     }
     else {
-      console.log('No user data found in local storage')
       const saveUser = async () => {
-        const mockUser = await users.getMockUser()
+        const mockUser = await users.getUser('0')
         localStorage.setItem('user', JSON.stringify(mockUser))
         users.setCurrentUser(mockUser)
         setUser(mockUser)
       }
       saveUser()
     }
-    const fetchPlans = async () => {
+    const fetchUserData = async () => {
       const plans = await users.getPlans()
       setPlans(plans)
-      const currentPlan = plans[0]
-      setCurrentViewPlan({
-        ...currentPlan
+      const latestPlan = plans[plans.length - 1]
+      const latestPlanRoutes = await users.getRoutesOf(latestPlan.id)
+      setCurrentPlan({
+        ...latestPlan,
+        routes: latestPlanRoutes
       })
+      const depot = await users.getDepot()
+      setDepot(depot)
     }
-    fetchPlans()
-  }, [setUser, setPlans, setCurrentViewPlan])
+    fetchUserData()
+  }, [setUser, setPlans, setCurrentPlan, setDepot, toggleDesktopNav])
 
   return (
     <AppShell
+      transitionDuration={350}
       navbar={{
         width: 300,
         breakpoint: 'sm',
-        collapsed: { mobile: !mobileNavOpened, desktop: !desktopNavOpened },
+        collapsed: {
+          mobile: !mobileNavOpened,
+          desktop: !desktopNavOpened 
+        },
+      }}
+      aside={{
+        width: 600,
+        breakpoint: 'sm',
+        collapsed: {
+          mobile: isViewing,
+          desktop: isViewing
+        }
       }}
     >
-      <NavOpenToggle />
+      {isViewing && <NavOpenToggle />}
+      <NewButton />
 
       <AppShell.Navbar>
-        {currentViewPlan && <Navbar />}
+        {<Navbar />}
       </AppShell.Navbar>
       
       <AppShell.Main className={classes.main}>
         <MapView />
       </AppShell.Main>
+
+      <AppShell.Aside>
+        <Aside />
+      </AppShell.Aside>
     </AppShell>
   );
 }
