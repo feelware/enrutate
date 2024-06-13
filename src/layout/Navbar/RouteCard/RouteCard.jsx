@@ -11,12 +11,12 @@ import CardBody from './CardBody'
 
 import classes from './RouteCard.module.css'
 
-const RouteCard = ({ targetRef, scrollIntoView, ...route }) => {
+const RouteCard = ({ scrollIntoView, ...route }) => {
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
     <>
-      <Card mx={12} p={0} targetRef={targetRef}>
+      <Card mx={12} p={0}>
         <Stack gap={0}>
           <CardHeader 
             {...route} 

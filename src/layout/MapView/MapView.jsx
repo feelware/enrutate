@@ -1,7 +1,7 @@
 import { 
   APIProvider, 
   Map,
-  Marker,
+  Marker
 } from '@vis.gl/react-google-maps'
 
 import useProcessStore from '../../store/useProcessStore'
@@ -16,26 +16,45 @@ const MapView = () => {
   } = useProcessStore()
   const markers = []
 
-  const routesSource = isViewing ? currentPlan : newPlan
 
-  routesSource?.routes.forEach(r =>
-    r.waypoints
-    .filter(w => w.client)
-    .forEach(w => (
+  if (isViewing) {
+    currentPlan?.routes.forEach(r =>
+      r.waypoints
+      .filter(w => w.client)
+      .forEach(w => (
+        markers.push(
+          <Marker
+            key={w.id}
+            position={{
+              lat: w.client.lat,
+              lng: w.client.lng
+            }} 
+          />
+        )
+      ))
+    )
+  }
+  else {
+    newPlan?.waypoints.forEach(w => 
       markers.push(
-        <Marker
-          key={w.id}
+        <Marker 
+          key={w.client.id}
           position={{
             lat: w.client.lat,
             lng: w.client.lng
-          }} 
+          }}
         />
       )
-    ))
-  )
+    )
+  }
 
   return (
-    <APIProvider apiKey={API_KEY}>
+    <APIProvider 
+      apiKey={API_KEY}
+      region='PE'
+      language='es-419'
+      libraries={['places']}
+    >
       <Map
         mapId='aeae66e71dbc67c9'
         style={{ width: '100%', height: '100%' }}

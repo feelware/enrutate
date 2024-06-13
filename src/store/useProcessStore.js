@@ -7,7 +7,7 @@ const useProcessStore = create((set) => ({
   currentPlan: null,
   setCurrentPlan: (currentPlan) => set({ currentPlan }),
 
-  newPlan: null,
+  newPlan: { waypoints: [] },
   setNewPlan: (newPlan) => set({ newPlan }),
 }))
 

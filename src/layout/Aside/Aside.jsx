@@ -16,6 +16,8 @@ import {
 } from '@tabler/icons-react'
 
 import GeneralInfo from './GeneralInfo'
+import AddClients from './AddClients'
+import SelectVehicles from './SelectVehicles'
 
 import useProcessStore from '../../store/useProcessStore'
 import useGUIStore from '../../store/useGUIStore'
@@ -90,12 +92,12 @@ const Aside = () => {
         <Stepper.Step 
           icon={<IconUsersGroup {...iconStyles} />}
         >
-          
+          <AddClients />
         </Stepper.Step>
         <Stepper.Step 
           icon={<IconTruckDelivery {...iconStyles} />}
         >
-          
+          <SelectVehicles />
         </Stepper.Step> 
       </Stepper>
 

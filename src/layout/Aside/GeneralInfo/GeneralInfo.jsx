@@ -4,7 +4,6 @@ import {
   TextInput
 } from '@mantine/core'
 
-import { useState } from 'react'
 import { DateTimePicker } from '@mantine/dates'
 
 const GeneralInfo = ({
@@ -16,7 +15,7 @@ const GeneralInfo = ({
   setDate
 }) => {
   return (
-    <Stack py={20}>
+    <Stack pt={15}>
       <Title order={3}>
         Informacion general
       </Title>
