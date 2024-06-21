@@ -5,17 +5,13 @@ import {
 } from '@mantine/core'
 
 import { DateTimePicker } from '@mantine/dates'
+import useNewPlan from '../../../store/useNewPlan'
 
-const GeneralInfo = ({
-  title,
-  setTitle,
-  description,
-  setDescription,
-  date,
-  setDate
-}) => {
+const GeneralInfo = () => {
+  const newPlan = useNewPlan()
+
   return (
-    <Stack pt={15}>
+    <Stack >
       <Title order={3}>
         Informacion general
       </Title>
@@ -23,19 +19,19 @@ const GeneralInfo = ({
         <TextInput
           label='Titulo'
           placeholder='Nuevo plan'
-          value={title}
-          onChange={(event) => setTitle(event.currentTarget.value)}
+          value={newPlan.title}
+          onChange={(event) => newPlan.setTitle(event.currentTarget.value)}
         />
         <TextInput
           label='Descripcion'
           placeholder='Nuevo plan de entrega de productos'
-          value={description}
-          onChange={(event) => setDescription(event.currentTarget.value)}
+          value={newPlan.description}
+          onChange={(event) => newPlan.setDescription(event.currentTarget.value)}
         />
         <DateTimePicker
           label='Fecha y hora de inicio'
-          value={date}
-          onChange={setDate}
+          value={newPlan.startDate}
+          onChange={(value) => newPlan.setStartDate(value)}
         />
       </Stack>
     </Stack>

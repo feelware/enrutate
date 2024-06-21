@@ -2,15 +2,16 @@ import {
   AppShell
 } from '@mantine/core';
 
-import useGUIStore from './store/useGUIStore';
-import useProcessStore from './store/useProcessStore';
-import useUserStore from './store/useUserStore';
+import useGUIStore from './store/useGUIStore'
+import useProcessStore from './store/useProcessStore'
+import useViewingPlan from './store/useViewingPlan'
+import useUserStore from './store/useUserStore'
 
-import Navbar from './layout/Navbar/';
+import Navbar from './layout/Navbar/'
 import NavOpenToggle from './layout/NavOpenToggle'
-import NewButton from './layout/NewButton';
+import NewButton from './layout/NewButton'
 import MapView from './layout/MapView'
-import Aside from './layout/Aside';
+import Aside from './layout/Aside'
 
 // import ThemeToggle from './layout/ThemeToggle'
 
@@ -27,9 +28,10 @@ const App = () => {
   } = useGUIStore()
 
   const {
-    isViewing,
-    setCurrentPlan
+    isViewing
   } = useProcessStore()
+
+  const { setViewingPlan } = useViewingPlan()
 
   const {
     setUser,
@@ -58,7 +60,7 @@ const App = () => {
       setPlans(plans)
       const latestPlan = plans[plans.length - 1]
       const latestPlanRoutes = await users.getRoutesOf(latestPlan.id)
-      setCurrentPlan({
+      setViewingPlan({
         ...latestPlan,
         routes: latestPlanRoutes
       })
@@ -66,7 +68,7 @@ const App = () => {
       setDepot(depot)
     }
     fetchUserData()
-  }, [setUser, setPlans, setCurrentPlan, setDepot, toggleDesktopNav])
+  }, [setUser, setPlans, setViewingPlan, setDepot, toggleDesktopNav])
 
   return (
     <AppShell

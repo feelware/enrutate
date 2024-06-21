@@ -21,13 +21,13 @@ import UserOptions from './UserOptions/'
 
 import RouteCard from './RouteCard' 
 
-import useProcessStore from '../../store/useProcessStore'
+import useViewingPlan from '../../store/useViewingPlan'
 import useGUIStore from '../../store/useGUIStore'
 
 import classes from './Navbar.module.css'
 
 const Navbar = () => {
-  const { currentPlan } = useProcessStore()
+  const { viewingPlan } = useViewingPlan()
   const { navPadding } = useGUIStore()
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView()
 
@@ -66,12 +66,12 @@ const Navbar = () => {
   return (
     <Stack justify="space-between" className={classes.navbar}>
     {
-      currentPlan && <>
+      viewingPlan && <>
         <Stack gap={5} pr={navPadding} pl={navPadding} pt={75}>
-          <Title order={3}>{currentPlan.name}</Title>
+          <Title order={3}>{viewingPlan.name}</Title>
           <ScrollArea mb={10} h={20}>
             <Text size="xs" >
-              {currentPlan.description}
+              {viewingPlan.description}
             </Text>
           </ScrollArea>
         </Stack>
@@ -95,7 +95,7 @@ const Navbar = () => {
           <ScrollArea className={classes.results}>
             <Stack ref={scrollableRef} gap={12} my={12}>
             {
-              currentPlan.routes?.map((route, index) => {
+              viewingPlan.routes?.map((route, index) => {
                 return (
                   <RouteCard 
                     key={index}

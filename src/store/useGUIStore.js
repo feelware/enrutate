@@ -11,14 +11,12 @@ const useGUIStore = create((set) => ({
     mobile: false,
     desktop: true
   },
-  
   holdNavOpened: () => set((state) => ({
     holdNavOpenedValues: {
       mobile: state.mobileNavOpened,
       desktop: state.desktopNavOpened
     }
   })),
-
   restoreNavOpened: () => set((state) => ({
     mobileNavOpened: state.holdNavOpenedValues.mobile,
     desktopNavOpened: state.holdNavOpenedValues.desktop

@@ -4,11 +4,8 @@ const useProcessStore = create((set) => ({
   isViewing: true,
   setIsViewing: (isViewing) => set(({ isViewing })),
 
-  currentPlan: null,
-  setCurrentPlan: (currentPlan) => set({ currentPlan }),
-
-  newPlan: { waypoints: [] },
-  setNewPlan: (newPlan) => set({ newPlan }),
+  isFormValid: false,
+  setFormValid: (isFormValid) => set(({ isFormValid })),
 }))
 
 export default useProcessStore

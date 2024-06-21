@@ -5,16 +5,13 @@ import {
 } from '@mantine/core'
 
 import { usePlacesWidget } from "react-google-autocomplete"
-import useProcessStore from '../../store/useProcessStore'
+import useNewPlan from '../../store/useNewPlan'
 import { useState } from 'react'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const SearchBar = () => {
-  const {
-    newPlan,
-    setNewPlan
-  } = useProcessStore()
+  const newPlan = useNewPlan()
 
   const [selected, setSelected] = useState(null)
 
@@ -27,6 +24,7 @@ const SearchBar = () => {
       fields: ['place_id', 'formatted_address', 'geometry.location', 'name']
     }
   })
+
   return (
     <Group align='flex-end'>
       <TextInput
@@ -39,21 +37,32 @@ const SearchBar = () => {
         variant='default'
         disabled={!selected}
         onClick={() => {
-          setNewPlan({
-            ...newPlan,
-            waypoints: [
-              ...newPlan.waypoints,
-              {
-                client: {
-                  id: selected.place_id,
-                  name: selected.name,
-                  address: selected.formatted_address,
-                  lat: selected.geometry.location.lat(),
-                  lng: selected.geometry.location.lng()
-                }
-              }
-            ]
-          })
+          // setNewPlan({
+          //   ...newPlan,
+          //   waypoints: [
+          //     ...newPlan.waypoints,
+          //     {
+          //       client: {
+          //         id: selected.place_id,
+          //         name: selected.name,
+          //         address: selected.formatted_address,
+          //         lat: selected.geometry.location.lat(),
+          //         lng: selected.geometry.location.lng()
+          //       }
+          //     }
+          //   ]
+          // })
+          newPlan.setClients([
+            ...newPlan.clients,
+            {
+              id: selected.place_id,
+              name: selected.name,
+              address: selected.formatted_address,
+              lat: selected.geometry.location.lat(),
+              lng: selected.geometry.location.lng(),
+              products: []
+            }
+          ])
         }}
       >
         Añadir

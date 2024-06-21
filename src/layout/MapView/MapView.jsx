@@ -5,20 +5,20 @@ import {
 } from '@vis.gl/react-google-maps'
 
 import useProcessStore from '../../store/useProcessStore'
+import useViewingPlan from '../../store/useViewingPlan'
+import useNewPlan from '../../store/useNewPlan'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const MapView = () => {
-  const { 
-    isViewing,
-    currentPlan,
-    newPlan 
-  } = useProcessStore()
+  const { isViewing } = useProcessStore()
+  const { viewingPlan } = useViewingPlan()
+  const newPlan = useNewPlan()
+
   const markers = []
 
-
   if (isViewing) {
-    currentPlan?.routes.forEach(r =>
+    viewingPlan?.routes.forEach(r =>
       r.waypoints
       .filter(w => w.client)
       .forEach(w => (
@@ -35,13 +35,13 @@ const MapView = () => {
     )
   }
   else {
-    newPlan?.waypoints.forEach(w => 
+    newPlan?.clients.forEach(client => 
       markers.push(
-        <Marker 
-          key={w.client.id}
+        <Marker
+          key={client.id}
           position={{
-            lat: w.client.lat,
-            lng: w.client.lng
+            lat: client.lat,
+            lng: client.lng
           }}
         />
       )

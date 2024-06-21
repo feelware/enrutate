@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import {
   Stack,
   Group,
   Stepper,
+  Box,
   Button,
   rem
 } from '@mantine/core'
@@ -20,6 +21,7 @@ import AddClients from './AddClients'
 import SelectVehicles from './SelectVehicles'
 
 import useProcessStore from '../../store/useProcessStore'
+import useNewPlan from '../../store/useNewPlan'
 import useGUIStore from '../../store/useGUIStore'
 
 const iconStyles = {
@@ -32,15 +34,17 @@ const iconStyles = {
 const Aside = () => {
   const {
     setIsViewing,
-    newPlan,
-    setNewPlan
   } = useProcessStore()
 
-  const [active, setActive] = useState(0)
+  const newPlan = useNewPlan()
 
   const { restoreNavOpened } = useGUIStore()
+  
+  const [active, setActive] = useState(0)
 
-  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current))
+  const prevStep = () => {
+    setActive((current) => Math.max(0, current - 1))
+  }
   const nextStep = () => {
     if (active === 2) {
       setActive(0)
@@ -48,58 +52,45 @@ const Aside = () => {
       setIsViewing(true)
       return
     }
-    setActive((current) => (current < 3 ? current + 1 : current))
+    setActive((current) => current + 1)
   }
 
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [date, setDate] = useState(new Date())
-
-  let nextDisabled = false
-  switch (active) {
-    case 0:
-      nextDisabled = (title === '' || description === '')
-      break 
-    default:
-      break
+  const validatorSelector = () => {
+    switch (active) {
+      case 0:
+        return newPlan.title !== '' && newPlan.description !== ''
+    }
   }
 
-  console.log(nextDisabled)
-  
+  const componentSelector = () => {
+    switch (active) {
+      case 0:
+        return <GeneralInfo />
+      case 1:
+        return <AddClients />
+      case 2:
+        return <SelectVehicles />
+    }
+  }
+
   return (
     <Stack 
       p={20}
       mt={60}
-      justify='space-between'
-      h='100%'
+      h='100vh'
     >
       <Stepper
         active={active}
         completedIcon={<IconCircleCheck {...iconStyles} />}
       >
-        <Stepper.Step 
-          icon={<IconInfoCircle {...iconStyles} />}
-        >
-          <GeneralInfo 
-            title={title}
-            setTitle={setTitle}
-            description={description}
-            setDescription={setDescription}
-            date={date}
-            setDate={setDate}
-          />
-        </Stepper.Step> 
-        <Stepper.Step 
-          icon={<IconUsersGroup {...iconStyles} />}
-        >
-          <AddClients />
-        </Stepper.Step>
-        <Stepper.Step 
-          icon={<IconTruckDelivery {...iconStyles} />}
-        >
-          <SelectVehicles />
-        </Stepper.Step> 
+        <Stepper.Step icon={<IconInfoCircle {...iconStyles} />} />
+        <Stepper.Step icon={<IconUsersGroup {...iconStyles} />} />
+        <Stepper.Step icon={<IconTruckDelivery {...iconStyles} />} />
       </Stepper>
+
+      <Box h='100%'>
+        {componentSelector()}
+      </Box>
 
       <Group justify='space-between'>
         <Button
@@ -112,7 +103,7 @@ const Aside = () => {
         <Button
           onClick={nextStep}
           variant={ active == 2 ? 'filled' : 'default' }
-          disabled={nextDisabled}
+          disabled={!validatorSelector()}
         >
           { active === 2 ? 'Generar' : 'Siguiente' }
         </Button>
