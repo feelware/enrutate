@@ -58,7 +58,15 @@ const Aside = () => {
   const validatorSelector = () => {
     switch (active) {
       case 0:
-        return newPlan.title !== '' && newPlan.description !== ''
+        return (
+          newPlan.title !== '' 
+          && newPlan.description !== ''
+        )
+      case 1:
+        return (
+          newPlan.clients.length 
+          && newPlan.clients.every(client => client.products.length)
+        )
     }
   }
 

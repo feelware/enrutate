@@ -18,13 +18,13 @@ const ClientCard = ({ client }) => {
   const { clients, setClients } = useNewPlan()
 
   return (
-    <Card>
-      <Group justify='space-between'>
+    <Card h={70}>
+      <Group justify='space-between' align='center' h='100%'>
         <Stack
           gap={0}
         >
           <Text size='sm' fw={500}>
-            {client.name}
+            {client.main_text}
           </Text>
           <Text c="dimmed" size='xs' truncate='end' w='400'>
             {client.products.length} pedidos · {client.address}
