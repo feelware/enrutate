@@ -22,19 +22,17 @@ import UserOptions from './UserOptions/'
 import RouteCard from './RouteCard' 
 
 import useViewingPlan from '../../store/useViewingPlan'
-import useGUIStore from '../../store/useGUIStore'
 
 import classes from './Navbar.module.css'
 
 const Navbar = () => {
   const { viewingPlan } = useViewingPlan()
-  const { navPadding } = useGUIStore()
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView()
 
   const Option = ({ label, Icon, onClick }) => (
     <Button
-      pl={navPadding}
-      pr={navPadding}
+      pl={25}
+      pr={25}
       justify='left'
       variant='subtle'
       color='default'
@@ -67,7 +65,7 @@ const Navbar = () => {
     <Stack justify="space-between" className={classes.navbar}>
     {
       viewingPlan && <>
-        <Stack gap={5} pr={navPadding} pl={navPadding} pt={75}>
+        <Stack gap={5} pr={25} pl={25} pt={75}>
           <Title order={3}>{viewingPlan.name}</Title>
           <ScrollArea mb={10} h={20}>
             <Text size="xs" >
@@ -86,8 +84,8 @@ const Navbar = () => {
                 borderRadius: 0,
                 border: 'none',
                 fontSize: rem(12),
-                paddingRight: navPadding,
-                paddingLeft: navPadding + 10,
+                paddingRight: 25,
+                paddingLeft: 25 + 10,
                 backgroundColor: 'transparent',
               }
             }}

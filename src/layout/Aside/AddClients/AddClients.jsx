@@ -18,7 +18,7 @@ import {
 
 import { useState } from 'react'
 
-import SearchBar from '../../../components/SearchBar/'
+import PlacesSearchBar from '../../../components/PlacesSearchBar/'
 import ClientCard from './ClientCard/'
 
 import useNewPlan from '../../../store/useNewPlan'
@@ -34,8 +34,8 @@ const AddClients = () => {
     status: 'idle',
     failHandler: null
   })
+  
   const newPlan = useNewPlan()
-
   const clients = newPlan.clients.filter(client => {
     return (
       !([client.main_text, client.address].every(field =>
@@ -50,7 +50,7 @@ const AddClients = () => {
         Añadir clientes
       </Title>
       <Group justify='space-between' align='flex-end'>
-        <SearchBar 
+        <PlacesSearchBar 
           onSubmit={(newClient) => newPlan.setClients([
             { ...newClient, products: [] }, ...newPlan.clients
           ])}

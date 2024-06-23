@@ -20,9 +20,9 @@ import GeneralInfo from './GeneralInfo'
 import AddClients from './AddClients'
 import SelectVehicles from './SelectVehicles'
 
-import useProcessStore from '../../store/useProcessStore'
+import useProcess from '../../store/useProcess'
 import useNewPlan from '../../store/useNewPlan'
-import useGUIStore from '../../store/useGUIStore'
+import useGUI from '../../store/useGUI'
 
 const iconStyles = {
   style: {
@@ -34,11 +34,11 @@ const iconStyles = {
 const Aside = () => {
   const {
     setIsViewing,
-  } = useProcessStore()
+  } = useProcess()
 
   const newPlan = useNewPlan()
 
-  const { restoreNavOpened } = useGUIStore()
+  const { restoreNavOpened } = useGUI()
   
   const [active, setActive] = useState(0)
 

@@ -1,0 +1,86 @@
+{
+  "products": [
+    { 
+      "id": "0",
+      "name": "Six-pack de leche entera",
+      "unit_weight": 3.2
+    },
+    { 
+      "id": "1",
+      "name": "Queso fresco",
+      "unit_weight": 0
+    },
+    { 
+      "id": "2",
+      "name": "Botella de yogurt de 1L",
+      "unit_weight": 1
+    },
+    { 
+      "id": "3",
+      "name": "Botella de yogurt de 500ml",
+      "unit_weight": 0.5
+    },
+    { 
+      "id": "4",
+      "name": "Botella de yogurt de 250ml",
+      "unit_weight": 0.25
+    },
+    { 
+      "id": "5",
+      "name": "Barra de manteca",
+      "unit_weight": 0.5
+    },
+    { 
+      "id": "6",
+      "name": "Queso fresco",
+      "unit_weight": 0
+    },
+    { 
+      "id": "7",
+      "name": "Queso mantecoso",
+      "unit_weight": 0
+    },
+    { 
+      "id": "8",
+      "name": "Queso andino",
+      "unit_weight": 0
+    },
+    { 
+      "id": "9",
+      "name": "Bolsa de crema de leche de 1L",
+      "unit_weight": 1
+    }
+  ],
+  "vehicles": [
+    { 
+      "id": "0",
+      "name": "Camioneta",
+      "capacity": 1000,
+      "instances": 4
+    },
+    { 
+      "id": "1",
+      "name": "Camión",
+      "capacity": 2000,
+      "instances": 3
+    },
+    { 
+      "id": "2",
+      "name": "Motocicleta",
+      "capacity": 100,
+      "instances": 8
+    },
+    { 
+      "id": "3",
+      "name": "Furgoneta",
+      "capacity": 500,
+      "instances": 6
+    },
+    { 
+      "id": "4",
+      "name": "Mototaxi",
+      "capacity": 50,
+      "instances": 10
+    }
+  ]
+}

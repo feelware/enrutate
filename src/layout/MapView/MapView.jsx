@@ -4,14 +4,14 @@ import {
   Marker
 } from '@vis.gl/react-google-maps'
 
-import useProcessStore from '../../store/useProcessStore'
+import useProcess from '../../store/useProcess'
 import useViewingPlan from '../../store/useViewingPlan'
 import useNewPlan from '../../store/useNewPlan'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const MapView = () => {
-  const { isViewing } = useProcessStore()
+  const { isViewing } = useProcess()
   const { viewingPlan } = useViewingPlan()
   const newPlan = useNewPlan()
 
@@ -35,6 +35,7 @@ const MapView = () => {
     )
   }
   else {
+    console.log(newPlan?.clients)
     newPlan?.clients.forEach(client => 
       markers.push(
         <Marker

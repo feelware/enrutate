@@ -7,7 +7,7 @@ import {
   IconMenu2
 } from '@tabler/icons-react'
 
-import useGUIStore from '../../store/useGUIStore'
+import useGUI from '../../store/useGUI'
 
 const NavOpenToggle = () => { 
   const {
@@ -15,11 +15,10 @@ const NavOpenToggle = () => {
     setMobileNavOpened,
     desktopNavOpened,
     setDesktopNavOpened,
-    navPadding
-  } = useGUIStore()
+  } = useGUI()
 
   return (
-    <Affix position={{ top: navPadding, left: navPadding }}>
+    <Affix position={{ top: 25, left: 25 }}>
       <ActionIcon
         hiddenFrom="sm"
         onClick={() => setMobileNavOpened(!mobileNavOpened)}

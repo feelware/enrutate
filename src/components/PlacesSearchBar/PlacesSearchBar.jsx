@@ -2,19 +2,19 @@ import {
   Autocomplete,
   Text,
   Stack,
-  Loader
+  Loader,
 } from '@mantine/core'
 
 import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService"
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const SearchBar = ({ onSubmit, setSubmitState }) => {
+const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
   const {
     placesService,
     placePredictions,
     getPlacePredictions,
-    isPlacePredictionsLoading,
+    isPlacePredictionsLoading
   } = usePlacesService({
     apiKey: API_KEY,
     language: 'es-419',
@@ -56,8 +56,7 @@ const SearchBar = ({ onSubmit, setSubmitState }) => {
           'formatted_address',
         ]
       },
-      (result, status) => {
-        console.log(status)
+      (result) => {
         if (!result) {
           setSubmitState({ 
             status: 'fail',
@@ -77,19 +76,28 @@ const SearchBar = ({ onSubmit, setSubmitState }) => {
     )
   }
 
+  const fetchPredictions = (input) => {
+    getPlacePredictions({ input })
+  }
+
+  let rightSection = null
+  if (isPlacePredictionsLoading) {
+    rightSection = <Loader size={15}/>
+  }
+
   return (
     <Autocomplete
       label='Dirección o nombre comercial'
       placeholder='Av. Amezaga, Lima 15081'
       w={300}
-      onChange={(input) => getPlacePredictions({ input })}
+      onChange={fetchPredictions}
       data={Object.keys(predictionsMap)}
       filter={({ options }) => options}
       renderOption={renderOption}
-      rightSection={isPlacePredictionsLoading && <Loader size={15}/>}
+      rightSection={rightSection}
       onOptionSubmit={onOptionSubmit}
     />
   )
 }
 
-export default SearchBar
+export default PlacesSearchBar

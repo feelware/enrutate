@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-const useGUIStore = create((set) => ({
+const useGUI = create((set) => ({
   mobileNavOpened: false,
   setMobileNavOpened: (mobileNavOpened) => set({ mobileNavOpened }),
 
@@ -11,18 +11,18 @@ const useGUIStore = create((set) => ({
     mobile: false,
     desktop: true
   },
+
   holdNavOpened: () => set((state) => ({
     holdNavOpenedValues: {
       mobile: state.mobileNavOpened,
       desktop: state.desktopNavOpened
     }
   })),
+
   restoreNavOpened: () => set((state) => ({
     mobileNavOpened: state.holdNavOpenedValues.mobile,
     desktopNavOpened: state.holdNavOpenedValues.desktop
   })),
-
-  navPadding: 25,
 }))
 
-export default useGUIStore
+export default useGUI

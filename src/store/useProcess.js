@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-const useProcessStore = create((set) => ({
+const useProcess = create((set) => ({
   isViewing: true,
   setIsViewing: (isViewing) => set(({ isViewing })),
 
@@ -8,4 +8,4 @@ const useProcessStore = create((set) => ({
   setFormValid: (isFormValid) => set(({ isFormValid })),
 }))
 
-export default useProcessStore
+export default useProcess
