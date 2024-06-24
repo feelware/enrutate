@@ -20,7 +20,7 @@ import {
 
 import { useState } from 'react'
 
-import authUser from '../../../services/authUser'
+import { getAuthUser } from '../../../services/authUser'
 
 import useLogin from '../../../store/useLogin'
 
@@ -32,6 +32,7 @@ const UserOptions = () => {
   const [, setUserMenuOpened] = useState(false);
   const { logout } = useLogin()
   const [opened, { open, close }] = useDisclosure(false)
+  const authUser = getAuthUser()
 
   return (
     <>

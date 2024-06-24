@@ -23,6 +23,12 @@ const useGUI = create((set) => ({
     mobileNavOpened: state.holdNavOpenedValues.mobile,
     desktopNavOpened: state.holdNavOpenedValues.desktop
   })),
+
+  isFetchingData: false,
+  setFetchingData: (isFetchingData) => set({ isFetchingData }),
+
+  isMapLoading: true,
+  setMapLoading: (isMapLoading) => set({ isMapLoading }),
 }))
 
 export default useGUI

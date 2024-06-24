@@ -1,6 +1,5 @@
 import users from "../../services/users"
 import CrudTable from "../../components/CrudTable/CrudTable"
-import MapView from '../../components/MapView'
 import { useState, useEffect } from 'react'
 import classes from './Recursos.module.css'
 
@@ -29,7 +28,6 @@ const Recursos = () => {
         height: '100%',
         gap: 30 
       }}>
-        <MapView />
         <div style={{ 
           height: '100%',
           display: 'flex',
@@ -46,7 +44,7 @@ const Recursos = () => {
               product.unit_weight === 0 ? 'A granel' : `${product.unit_weight} kg`,
               `${product.amount}${product.unit_weight ? '' : ' kg'}`]
             }
-            onEdit={async (product) => {
+            onUpdate={async (product) => {
               console.log('Editing', product.name)
               await users.editProduct(product.id, product)
               const newProducts = products.map(p => p.id === product.id ? product : p)
@@ -70,7 +68,7 @@ const Recursos = () => {
               product.instances,
               `${product.capacity} kg`
             ]}
-            onEdit={async (product) => {
+            onUpdate={async (product) => {
               console.log('Editing', product.name)
               await users.editProduct(product.id, product)
               const newProducts = vehicles.map(p => p.id === product.id ? product : p)

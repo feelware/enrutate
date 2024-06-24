@@ -55,6 +55,7 @@ const AddClients = () => {
             { ...newClient, products: [] }, ...newPlan.clients
           ])}
           setSubmitState={setSubmitState}
+          w={350}
         />
         <Button>
           Importar

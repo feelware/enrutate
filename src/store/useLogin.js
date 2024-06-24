@@ -1,8 +1,8 @@
 import { create } from 'zustand'
-import storedUser, { authWithPassword, clearAuth, autoRefresh } from '../services/authUser'
+import { getAuthUser, authWithPassword, clearAuth, autoRefresh } from '../services/authUser'
 
-const useLogin = create((set) => ({
-  loggedIn: storedUser !== null,
+const useLogin = create((set) =>  ({
+  loggedIn: getAuthUser() !== null,
   login: async ({ username, password }) => {
     const { loggedInUser, error } = await authWithPassword(username, password)
     if (error) {
@@ -15,7 +15,9 @@ const useLogin = create((set) => ({
     clearAuth()
     set({ loggedIn: false })
   },
-  autoRefresh: () => autoRefresh(() => set({ loggedIn: false }))
+  autoRefresh: () => autoRefresh({
+    onUserDelete: () => set({ loggedIn: false })
+  })
 }))
 
 export default useLogin

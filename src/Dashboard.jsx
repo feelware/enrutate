@@ -1,6 +1,7 @@
 import { 
-  AppShell
-} from '@mantine/core';
+  AppShell,
+  LoadingOverlay
+} from '@mantine/core'
 
 import useGUI from './store/useGUI'
 import useProcess from './store/useProcess'
@@ -13,16 +14,20 @@ import NewButton from './layout/NewButton'
 import MapView from './layout/MapView'
 import Aside from './layout/Aside'
 
+import AppLoader from './components/AppLoader'
+
 import classes from './Dashboard.module.css'
 
-import { useEffect } from 'react';
-import users from './services/users';
+import { useEffect } from 'react'
+import users from './services/users'
 
 const App = () => {
   const { 
     mobileNavOpened,
     desktopNavOpened,
     toggleDesktopNav,
+    isFetchingData,
+    isMapLoading
   } = useGUI()
 
   const {
@@ -68,41 +73,52 @@ const App = () => {
     fetchUserData()
   }, [setUser, setPlans, setViewingPlan, setDepot, toggleDesktopNav])
 
+  const isAppLoading = isFetchingData || isMapLoading
+
   return (
-    <AppShell
-      transitionDuration={350}
-      navbar={{
-        width: 300,
-        breakpoint: 'sm',
-        collapsed: {
-          mobile: !mobileNavOpened,
-          desktop: !desktopNavOpened 
-        },
-      }}
-      aside={{
-        width: 600,
-        breakpoint: 'sm',
-        collapsed: {
-          mobile: isViewing,
-          desktop: isViewing
-        }
-      }}
-    >
-      {isViewing && <NavOpenToggle />}
-      <NewButton />
+    <>
+      <AppShell
+        transitionDuration={350}
+        navbar={{
+          width: 300,
+          breakpoint: 'sm',
+          collapsed: {
+            mobile: !mobileNavOpened,
+            desktop: !desktopNavOpened 
+          },
+        }}
+        aside={{
+          width: 600,
+          breakpoint: 'sm',
+          collapsed: {
+            mobile: isViewing,
+            desktop: isViewing
+          }
+        }}
+      >
+        {isViewing && <NavOpenToggle />}
+        <NewButton />
 
-      <AppShell.Navbar>
-        <Navbar />
-      </AppShell.Navbar>
-      
-      <AppShell.Main className={classes.main}>
-        <MapView />
-      </AppShell.Main>
+        <AppShell.Navbar>
+          {!isAppLoading && <Navbar />}
+        </AppShell.Navbar>
+        
+        <AppShell.Main className={classes.main}>
+          <MapView />
+        </AppShell.Main>
 
-      <AppShell.Aside>
-        <Aside />
-      </AppShell.Aside>
-    </AppShell>
+        <AppShell.Aside>
+          {!isAppLoading && <Aside />}
+        </AppShell.Aside>
+      </AppShell>
+      <LoadingOverlay
+        visible={isAppLoading}
+        overlayProps={{ blur: 2 }}
+        loaderProps={{
+          children: <AppLoader />
+        }}
+      />
+    </>
   );
 }
 

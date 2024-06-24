@@ -3,13 +3,23 @@ import {
   Text,
   Stack,
   Loader,
+  Anchor,
 } from '@mantine/core'
+import { useState } from 'react'
 
 import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService"
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
-const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
+const PlacesSearchBar = ({ 
+  w,
+  label,
+  onSubmit,
+  initialValue,
+  setSubmitState = () => {},
+  glowOnError,
+  withAsterisk
+}) => {
   const {
     placesService,
     placePredictions,
@@ -20,6 +30,9 @@ const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
     language: 'es-419',
     options: { types: ['establishment'] }
   })
+
+  const [value, setValue] = useState(initialValue || '')
+  const [error, setError] = useState(false)
 
   const predictionsMap = {}
   placePredictions.forEach(p => {
@@ -58,6 +71,7 @@ const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
       },
       (result) => {
         if (!result) {
+          setError(true)
           setSubmitState({ 
             status: 'fail',
             failHandler: () => onOptionSubmit(description)
@@ -66,7 +80,7 @@ const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
         }
         const newClient = {
           ...place,
-          address: result.formatted_address,
+          formatted_address: result.formatted_address,
           lat: result.geometry.location.lat(),
           lng: result.geometry.location.lng(),
         }
@@ -77,6 +91,7 @@ const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
   }
 
   const fetchPredictions = (input) => {
+    setValue(input)
     getPlacePredictions({ input })
   }
 
@@ -87,15 +102,30 @@ const PlacesSearchBar = ({ onSubmit, setSubmitState }) => {
 
   return (
     <Autocomplete
-      label='Dirección o nombre comercial'
+      w={w || '100%'}
+      label={label || 'Dirección o nombre comercial'}
       placeholder='Av. Amezaga, Lima 15081'
-      w={300}
+      value={value}
       onChange={fetchPredictions}
       data={Object.keys(predictionsMap)}
       filter={({ options }) => options}
       renderOption={renderOption}
       rightSection={rightSection}
       onOptionSubmit={onOptionSubmit}
+      error={glowOnError && error && (
+        <Text size='xs' c='dimmed'>
+          Hubo un error · {' '}
+          <Anchor
+            onClick={() => {
+              onOptionSubmit(value)
+              setError(false)
+            }}
+          >
+            Reintentar
+          </Anchor>
+        </Text>
+      )}
+      withAsterisk={withAsterisk}
     />
   )
 }

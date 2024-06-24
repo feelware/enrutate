@@ -1,85 +1,113 @@
 import {
   Table,
   TextInput, 
-  ActionIcon,
   Group,
+  Stack,
+  ScrollArea,
   Button,
+  Popover,
 } from '@mantine/core'
-import { IconEdit, IconTrash } from '@tabler/icons-react'
+
+import CrudRow from './CrudRow'
+import CrudEditor from './CrudEditor'
+
 import { useState } from 'react'
-import classes from './CrudTable.module.css'
+import { useDisclosure } from '@mantine/hooks'
 
 const CrudTable = ({
-  entityName,
-  head,
-  filterCol = "name",
+  name,
   entries,
-  colSelector,
-  onEdit,
-  onDelete,
-  minWidth,
-  maxHeight = "100%",
-  height = "100%",
-  flex = 1
+  attributes,
+  onCreate,
+  onUpdate,
+  onDelete = () => {},
 }) => {
-  const [filter, setFilter] = useState('')
+  const [createOpened, createHandlers] = useDisclosure()
+  const [filterQuery, setFilterQuery] = useState('')
 
-  const data = {
-    head: [ ...head, ' '],
-    body: entries
-      .filter((entry) => entry[filterCol].toLowerCase().includes(filter.toLowerCase()))
-      .map((entry) => [
-        ...colSelector(entry),
-        <Group key={entry.id} justify='flex-end'>
-          <ActionIcon 
-            size='xs'
-            variant="transparent"
-            color="gray"
-            title="Editar"
-            onClick={() => onEdit(entry)}
-          >
-            <IconEdit />
-          </ActionIcon>
-          <ActionIcon
-            size='xs'
-            variant="transparent"
-            color="gray"
-            title="Eliminar"
-            onClick={() => onDelete(entry)}
-          >
-            <IconTrash />
-          </ActionIcon>
-        </Group>
-      ])
-  }
+  const filteringSelectors = Object.values(attributes)
+    .filter((a) => a.filter)
+    .map((a) => a.selector)
+
+  const matchesQuery = (value) => value.toLowerCase().includes(filterQuery.toLowerCase())
+
+  const filteredEntries = entries.filter((entry) => (
+    !(filteringSelectors.every(selector => (
+      !matchesQuery(selector(entry))
+    )))
+  ))
+
+  const headers = Object.values(attributes).map((a) => a.label)
+
+  const crudRows = filteredEntries.map((entry) => (
+    <CrudRow 
+      key={entry.id}
+      entry={entry}
+      attributes={attributes}
+      onUpdate={onUpdate}
+      onDelete={onDelete}
+    />
+  ))
 
   return (
     <>
-      <div className={classes.main} style={{ 
-        minWidth,
-        maxHeight,
-        height,
-        flex
-      }}>
+      <Stack h='100%'>
         <Group justify="space-between">
           <TextInput
-            placeholder={`Buscar ${entityName}`}
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+            placeholder={`Buscar ${name}`}
+            value={filterQuery}
+            onChange={(e) => setFilterQuery(e.target.value)}
           />
-          <Button>
-            Nuevo
-          </Button>
+          <Popover
+            opened={createOpened}
+            onClose={createHandlers.close}
+            offset={10}
+            withArrow
+          >
+            <Popover.Target>
+              <Button onClick={createHandlers.toggle}>
+                Nuevo
+              </Button>
+            </Popover.Target>
+            <Popover.Dropdown>
+              <CrudEditor
+                attributes={attributes}
+                onSubmit={onCreate}
+                close={createHandlers.close}
+              />
+            </Popover.Dropdown>
+          </Popover>
         </Group>
-        <div className={classes.table}>
+        <ScrollArea h='100%'>
           <Table
-            stickyHeader
-            data={data}
-            verticalSpacing="sm"
             horizontalSpacing="md"
-          />
-        </div>
-      </div>
+            styles={{
+              td: {
+                maxWidth: 350,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }
+            }} 
+          >
+            <Table.Thead>
+              <Table.Tr>
+              {
+                headers.map((h, i) => (
+                  <Table.Th key={i}>
+                    {h}
+                  </Table.Th>
+                ))
+              }
+                <Table.Th>{' '}</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              {crudRows}
+            </Table.Tbody>
+          </Table>
+        </ScrollArea>
+      </Stack>
     </>
   )
 }

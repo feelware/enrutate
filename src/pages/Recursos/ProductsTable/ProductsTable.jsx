@@ -20,7 +20,7 @@ const ProductsTable = ({ products, handlers }) => {
             variant="transparent"
             color="gray"
             title="Editar"
-            onClick={() => handlers.onEdit(product)}
+            onClick={() => handlers.onUpdate(product)}
           >
             <IconEdit />
           </ActionIcon>
@@ -39,12 +39,6 @@ const ProductsTable = ({ products, handlers }) => {
 
   return (
     <div className={classes.main}>
-      {/* <HeaderSearch 
-        title="Productos"
-        filter={filter} 
-        setFilter={setFilter}
-        placeholder="Buscar producto" 
-      /> */}
       <Table data={data} />
     </div>
   )

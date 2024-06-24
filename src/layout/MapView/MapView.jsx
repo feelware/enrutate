@@ -7,10 +7,12 @@ import {
 import useProcess from '../../store/useProcess'
 import useViewingPlan from '../../store/useViewingPlan'
 import useNewPlan from '../../store/useNewPlan'
+import useGUI from '../../store/useGUI'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const MapView = () => {
+  const { setMapLoading } = useGUI()
   const { isViewing } = useProcess()
   const { viewingPlan } = useViewingPlan()
   const newPlan = useNewPlan()
@@ -35,7 +37,6 @@ const MapView = () => {
     )
   }
   else {
-    console.log(newPlan?.clients)
     newPlan?.clients.forEach(client => 
       markers.push(
         <Marker
@@ -55,6 +56,7 @@ const MapView = () => {
       region='PE'
       language='es-419'
       libraries={['places']}
+      onLoad={() => setMapLoading(false)}
     >
       <Map
         mapId='aeae66e71dbc67c9'
@@ -64,6 +66,7 @@ const MapView = () => {
         gestureHandling={'greedy'}
         disableDefaultUI={true}
         onClick={(e) => console.log(e.detail.latLng)}
+        
       >
         {markers}
       </Map>

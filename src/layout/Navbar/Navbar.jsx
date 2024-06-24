@@ -28,7 +28,7 @@ import classes from './Navbar.module.css'
 const Navbar = () => {
   const { viewingPlan } = useViewingPlan()
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView()
-
+  
   const Option = ({ label, Icon, onClick }) => (
     <Button
       pl={25}
