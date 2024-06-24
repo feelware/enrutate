@@ -8,6 +8,7 @@ import {
 import PlacesSearchBar from '../../../../../components/PlacesSearchBar/'
 
 const General = ({ form, onSubmit }) => {
+  console.log(form.values)
 
   return (
     <form
@@ -35,7 +36,7 @@ const General = ({ form, onSubmit }) => {
           />
           <PlacesSearchBar 
             label="Ubicación de almacén"
-            initialValue={form.values.description}
+            initialValue={form.values.depot_description}
             glowOnError
             onSubmit={(place) => {
               form.setValues({

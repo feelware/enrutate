@@ -30,7 +30,7 @@ const PlacesSearchBar = ({
     language: 'es-419',
     options: { types: ['establishment'] }
   })
-
+  
   const [value, setValue] = useState(initialValue || '')
   const [error, setError] = useState(false)
 

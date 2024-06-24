@@ -4,6 +4,7 @@ import Login from './Login'
 import useLogin from './store/useLogin'
 import useGUI from './store/useGUI'
 
+
 import { fetchProducts } from './services/products'
 import { fetchVehicles } from './services/vehicles'
 
@@ -20,6 +21,7 @@ const App = () => {
     const fetchInitData = async () => {
       if (loggedIn) {
         setFetchingData(true)
+
         await fetchProducts()
         await fetchVehicles()
         setFetchingData(false)
