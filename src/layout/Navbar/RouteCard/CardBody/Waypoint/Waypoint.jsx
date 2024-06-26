@@ -1,39 +1,40 @@
-import { useState } from 'react'
-
 import {
   Timeline,
   Text,
   Stack,
-  Flex,
+  Group,
   ActionIcon,
-  Transition,
-  Tooltip,
   Popover,
   rem
 } from '@mantine/core'
 
-import { useDisclosure } from '@mantine/hooks'
+import { 
+  useDisclosure,
+  useClickOutside
+} from '@mantine/hooks'
 
 import {
-  IconShoppingBag
+  IconShoppingCart
 } from '@tabler/icons-react'
 
 import OrdersList from './OrdersList'
 
 const Waypoint = ({ client }) => {
-  const [hover, setHover] = useState(false)
   const [opened, { close, toggle }] = useDisclosure(false)
+  const ref = useClickOutside(() => close())
 
   return (
     <Timeline.Item
       title={
-        <Flex 
-          justify='space-between' 
-          align='center'
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+        <Group
+          gap={30}
+          grow
+          preventGrowOverflow={false}
         >
-          <Stack gap={rem(8)} >
+          <Stack 
+            gap={rem(8)}
+            flex={8}
+          >
             <Text size={rem(13)} fw={500}>
               {client?.main_text || 'Almacén'}
             </Text>
@@ -48,46 +49,33 @@ const Waypoint = ({ client }) => {
             offset={50}
             opened={opened}
           >
-              <Transition
-                mounted={client && hover}
-                transition='fade'
+            <Popover.Target>
+              <ActionIcon
+                title='Ver pedidos'
+                color='dimmed'
+                variant='transparent'
+                onClick={toggle}
+                flex={1}
+                ref={ref}
               >
-              {
-                (styles) => 
-                <div style={styles}>
-                  <Tooltip 
-                    label={
-                      <Text size={rem(12)} py={3}>
-                        Ver pedidos
-                      </Text>
-                    }
-                    openDelay={150}
-                    position='bottom'
-                    offset={8}
-                    transitionProps={{
-                      duration: 250,
-                      transition: 'fade'
-                    }}
-                  >
-                    <Popover.Target>
-                      <ActionIcon
-                        size='xs'
-                        color='default'
-                        variant='transparent'
-                        onClick={toggle}
-                      >
-                        <IconShoppingBag />
-                      </ActionIcon>
-                    </Popover.Target>
-                  </Tooltip>
-                </div>
-              }
-              </Transition>
-            <Popover.Dropdown w={250}>
-              <OrdersList products={client.products} onClose={close} />
+                <IconShoppingCart size={15} />
+              </ActionIcon>
+            </Popover.Target>
+            <Popover.Dropdown 
+              w={250}
+              mah={300}
+              p={0}
+              style={{
+                overflowY: 'auto',
+              }}
+            >
+              <OrdersList 
+                products={client.products} 
+                onClose={close} 
+              />
             </Popover.Dropdown>
           </Popover>
-        </Flex>
+        </Group>
       }
       bullet={<></>}
     />

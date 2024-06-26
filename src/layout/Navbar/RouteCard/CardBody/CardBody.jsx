@@ -12,6 +12,7 @@ const CardBody = (route) => {
       className={classes.content} 
       py={20}
       px={25}
+      pr={20}
       bulletSize={16} 
       lineWidth={2}
     >
