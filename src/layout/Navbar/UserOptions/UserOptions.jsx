@@ -9,30 +9,23 @@ import {
 } from '@mantine/core'
 
 import {
-  useDisclosure
-} from '@mantine/hooks'
-
-import {
   IconChevronRight,
   IconSettings,
   IconLogout,
 } from '@tabler/icons-react'
 
 import { useState } from 'react'
-
-import { getAuthUser } from '../../../services/authUser'
-
+import { useLocation } from 'wouter'
 import useLogin from '../../../store/useLogin'
 
-import Settings from './Settings'
-
+import { getAuthUser } from '../../../services/authUser'
 import classes from './UserOptions.module.css'
 
 const UserOptions = () => {
   const [, setUserMenuOpened] = useState(false);
   const { logout } = useLogin()
-  const [opened, { open, close }] = useDisclosure(false)
   const authUser = getAuthUser()
+  const [, setLocation] = useLocation()
 
   return (
     <>
@@ -82,7 +75,9 @@ const UserOptions = () => {
                 stroke={1.5} 
               />
             }
-            onClick={open}
+            onClick={() => {
+              setLocation('/settings')
+            }}
           >
             Ajustes
           </Menu.Item>
@@ -102,10 +97,6 @@ const UserOptions = () => {
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
-      <Settings 
-        opened={opened}
-        onClose={close}
-      />
     </>
   )
 }

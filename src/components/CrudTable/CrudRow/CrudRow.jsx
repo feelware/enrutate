@@ -91,7 +91,7 @@ const CrudRow = ({
             <Popover.Dropdown ref={deleteRef}>
               <Stack
                 gap={16}
-                py={8}
+                py={5}
                 align='center'
               >
                 <Text size={rem(15)}>

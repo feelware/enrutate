@@ -23,12 +23,15 @@ import {
   getDepot,
   updateAuthUser,
   updateDepot
-} from '../../../../services/authUser'
+} from '../../../services/authUser'
 
-const Settings = ({ opened, onClose }) => {
-  const [active, setActive] = useState('general')
-  // const authUser = getAuthUser()
-  // const depot = getDepot()
+import { useLocation, useRoute } from 'wouter'
+
+const Settings = () => {
+  const [activeSection, setActiveSection] = useState('general')
+  const [opened] = useRoute('/settings')
+  const [, setLocation] = useLocation()
+
   const [authUser, setAuthUser] = useState(getAuthUser())
   const [depot, setDepot] = useState(getDepot())
 
@@ -53,8 +56,8 @@ const Settings = ({ opened, onClose }) => {
       <Modal
         opened={opened}
         onClose={() => {
+          setLocation('/')
           generalForm.reset()
-          onClose()
         }}
         withCloseButton={true}
         centered
@@ -71,18 +74,18 @@ const Settings = ({ opened, onClose }) => {
         >
           <Stack gap={0}>
             <NavLink 
-              onClick={() => setActive('general')} 
-              active={active === 'general'}
+              onClick={() => setActiveSection('general')} 
+              active={activeSection === 'general'}
               label={'General'}
             />
             <NavLink 
-              onClick={() => setActive('products')} 
-              active={active === 'products'}
+              onClick={() => setActiveSection('products')} 
+              active={activeSection === 'products'}
               label={'Productos'}
             />
             <NavLink 
-              onClick={() => setActive('vehicles')} 
-              active={active === 'vehicles'}
+              onClick={() => setActiveSection('vehicles')} 
+              active={activeSection === 'vehicles'}
               label={'Vehículos'}
             />
           </Stack>
@@ -91,7 +94,7 @@ const Settings = ({ opened, onClose }) => {
             h={500}
           >
           {
-            active === 'general' ? (
+            activeSection === 'general' ? (
               <General 
                 form={generalForm}
                 onSubmit={async (values) => {
@@ -112,8 +115,8 @@ const Settings = ({ opened, onClose }) => {
                 }}
               />
             ) :
-            active === 'products' ? <Products /> :
-            active === 'vehicles' ? <Vehicles /> : null
+            activeSection === 'products' ? <Products /> :
+            activeSection === 'vehicles' ? <Vehicles /> : null
           }
           </Box>
         </Group>

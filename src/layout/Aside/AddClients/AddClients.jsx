@@ -36,9 +36,11 @@ const AddClients = () => {
   })
   
   const newPlan = useNewPlan()
-  const clients = newPlan.clients.filter(client => {
+  const unfilteredClients = Array.from(newPlan.clients.values())
+
+  const clients = unfilteredClients.filter(client => {
     return (
-      !([client.main_text, client.address].every(field =>
+      !([client.main_text, client.formatted_address].every(field =>
         !(field.toLowerCase().includes(clientFilter.toLowerCase()))
       ))
     )
@@ -51,9 +53,7 @@ const AddClients = () => {
       </Title>
       <Group justify='space-between' align='flex-end'>
         <PlacesSearchBar 
-          onSubmit={(newClient) => newPlan.setClients([
-            { ...newClient, products: [] }, ...newPlan.clients
-          ])}
+          onSubmit={(newClient) => newPlan.updateClient({ ...newClient, products: [] })}
           setSubmitState={setSubmitState}
           w={350}
         />
@@ -112,7 +112,9 @@ const AddClients = () => {
             clients.map(client => (
               <ClientCard
                 key={client.id} 
-                client={client} 
+                client={client}
+                onUpdate={(updatedClient) => newPlan.updateClient(updatedClient)}
+                onDelete={() => newPlan.removeClient(client.id)}
               />
             ))
           }

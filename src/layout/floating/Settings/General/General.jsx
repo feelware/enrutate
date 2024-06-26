@@ -5,11 +5,9 @@ import {
   Stack
 } from '@mantine/core'
 
-import PlacesSearchBar from '../../../../../components/PlacesSearchBar/'
+import PlacesSearchBar from '../../../../components/PlacesSearchBar'
 
 const General = ({ form, onSubmit }) => {
-  console.log(form.values)
-
   return (
     <form
       onSubmit={form.onSubmit(async (values) => {

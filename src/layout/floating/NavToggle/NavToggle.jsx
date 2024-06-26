@@ -7,9 +7,9 @@ import {
   IconMenu2
 } from '@tabler/icons-react'
 
-import useGUI from '../../store/useGUI'
+import useGUI from '../../../store/useGUI'
 
-const NavOpenToggle = () => { 
+const NavToggle = () => { 
   const {
     mobileNavOpened,
     setMobileNavOpened,
@@ -37,4 +37,4 @@ const NavOpenToggle = () => {
   )
 }
 
-export default NavOpenToggle;
+export default NavToggle;

@@ -21,7 +21,6 @@ const App = () => {
     const fetchInitData = async () => {
       if (loggedIn) {
         setFetchingData(true)
-
         await fetchProducts()
         await fetchVehicles()
         setFetchingData(false)

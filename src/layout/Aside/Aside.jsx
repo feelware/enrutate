@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import {
   Stack,
@@ -12,13 +12,11 @@ import {
 import {
   IconInfoCircle,
   IconUsersGroup,
-  IconTruckDelivery,
   IconCircleCheck
 } from '@tabler/icons-react'
 
 import GeneralInfo from './GeneralInfo'
 import AddClients from './AddClients'
-import SelectVehicles from './SelectVehicles'
 
 import useProcess from '../../store/useProcess'
 import useNewPlan from '../../store/useNewPlan'
@@ -62,11 +60,13 @@ const Aside = () => {
           newPlan.title !== '' 
           && newPlan.description !== ''
         )
-      case 1:
+      case 1: {
+        const clients = Array.from(newPlan.clients.values())
         return (
-          newPlan.clients.length 
-          && newPlan.clients.every(client => client.products.length)
+          clients.length 
+          && clients.every(client => client.products.length)
         )
+      }
     }
   }
 
@@ -76,8 +76,6 @@ const Aside = () => {
         return <GeneralInfo />
       case 1:
         return <AddClients />
-      case 2:
-        return <SelectVehicles />
     }
   }
 
@@ -93,7 +91,6 @@ const Aside = () => {
       >
         <Stepper.Step icon={<IconInfoCircle {...iconStyles} />} />
         <Stepper.Step icon={<IconUsersGroup {...iconStyles} />} />
-        <Stepper.Step icon={<IconTruckDelivery {...iconStyles} />} />
       </Stepper>
 
       <Box h='100%'>
@@ -110,10 +107,10 @@ const Aside = () => {
         </Button>
         <Button
           onClick={nextStep}
-          variant={ active == 2 ? 'filled' : 'default' }
+          variant={ active == 1 ? 'filled' : 'default' }
           disabled={!validatorSelector()}
         >
-          { active === 2 ? 'Generar' : 'Siguiente' }
+          { active === 1 ? 'Generar' : 'Siguiente' }
         </Button>
       </Group>
     </Stack>

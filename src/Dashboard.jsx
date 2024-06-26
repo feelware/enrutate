@@ -9,10 +9,12 @@ import useViewingPlan from './store/useViewingPlan'
 import useUserStore from './store/useUserStore'
 
 import Navbar from './layout/Navbar'
-import NavOpenToggle from './layout/NavOpenToggle'
-import NewButton from './layout/NewButton'
 import MapView from './layout/MapView'
 import Aside from './layout/Aside'
+
+import Settings from './layout/floating/Settings'
+import NavToggle from './layout/floating/NavToggle'
+import CreatePlanButton from './layout/floating/CreatePlanButton'
 
 import AppLoader from './components/AppLoader'
 
@@ -96,8 +98,10 @@ const App = () => {
           }
         }}
       >
-        {isViewing && <NavOpenToggle />}
-        <NewButton />
+        {/* Floating elements */}
+        {isViewing && <NavToggle />}
+        <CreatePlanButton />
+        <Settings />
 
         <AppShell.Navbar>
           {!isAppLoading && <Navbar />}

@@ -3,10 +3,10 @@ import {
   Affix
 } from '@mantine/core'
 
-import useProcess from '../../store/useProcess'
-import useGUI from '../../store/useGUI'
+import useProcess from '../../../store/useProcess'
+import useGUI from '../../../store/useGUI'
 
-const NewButton = () => {
+const CreatePlanButton = () => {
   const { isViewing, setIsViewing } = useProcess()
   const {
     setMobileNavOpened, 
@@ -40,4 +40,4 @@ const NewButton = () => {
   )
 }
 
-export default NewButton
+export default CreatePlanButton
