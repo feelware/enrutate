@@ -16,8 +16,8 @@ const CardBody = (route) => {
       lineWidth={2}
     >
     {
-      route.waypoints.map(w => (
-        <Waypoint key={w.id} waypoint={w} />
+      route.clients.map(client => (
+        <Waypoint key={client.id} client={client} />
       ))
     }
     </Timeline>

@@ -1,0 +1,271 @@
+{
+  "title": "Entrega de lacteos",
+  "description": "Entrega de productos lacteos en Lima",
+  "startDate": "2024-06-26T13:00:00.956Z",
+  "clients": [
+    {
+      "id": "ChIJjfYY3OjPBZERuvMOuzc7Zd8",
+      "description": "Lácteos La Muquita, San Martín de Porres",
+      "main_text": "Lácteos La Muquita",
+      "secondary_text": "San Martín de Porres",
+      "formatted_address": "C.C, San Martín de Porres 15102",
+      "lat": -12.0106197,
+      "lng": -77.0594205,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:44:32.643Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "bf6lzhzgwrj0j6z",
+          "name": "Bolsa de crema de leche de 1L",
+          "unit_weight": 1,
+          "updated": "2024-06-23 18:44:32.643Z",
+          "amount_requested": 2
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:41:56.241Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "5cp9tla3w24a3y5",
+          "name": "Botella de yogurt de 250ml",
+          "unit_weight": 0.25,
+          "updated": "2024-06-23 18:41:56.241Z",
+          "amount_requested": 3
+        }
+      ]
+    },
+    {
+      "id": "ChIJ429p7pnOBZERz7WsTmv4jlo",
+      "description": "Panaderia El Molino, Avenida El Olivar, Callao",
+      "main_text": "Panaderia El Molino",
+      "secondary_text": "Avenida El Olivar, Callao",
+      "formatted_address": "Av. El Olivar 547, Callao 07041",
+      "lat": -12.016488,
+      "lng": -77.0919186,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:43:30.940Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "uv7la9cstn5ku13",
+          "name": "Barra de manteca",
+          "unit_weight": 0.65,
+          "updated": "2024-06-24 09:38:48.119Z",
+          "amount_requested": 2
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:40:22.013Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "xxlybpbmq33q43j",
+          "name": "Six-pack de leche entera",
+          "unit_weight": 3.2,
+          "updated": "2024-06-23 18:40:22.013Z",
+          "amount_requested": 3
+        }
+      ]
+    },
+    {
+      "id": "ChIJbegyV6_OBZER15sqBEP4EDk",
+      "description": "Lácteos Piamonte, Avenida Quilca, Callao",
+      "main_text": "Lácteos Piamonte",
+      "secondary_text": "Avenida Quilca, Callao",
+      "formatted_address": "Av. Quilca 541, Callao 07041",
+      "lat": -12.032913,
+      "lng": -77.0961114,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:44:10.395Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "boblykdu9dom6r2",
+          "name": "Queso andino",
+          "unit_weight": 1,
+          "updated": "2024-06-24 07:40:49.767Z",
+          "amount_requested": 1
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-24 09:36:51.028Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "z6e579okz1w5ad0",
+          "name": "Tarrito de leche condensada",
+          "unit_weight": 0.45,
+          "updated": "2024-06-24 09:37:01.426Z",
+          "amount_requested": 4
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:40:22.013Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "xxlybpbmq33q43j",
+          "name": "Six-pack de leche entera",
+          "unit_weight": 3.2,
+          "updated": "2024-06-23 18:40:22.013Z",
+          "amount_requested": 2
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:43:30.940Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "uv7la9cstn5ku13",
+          "name": "Barra de manteca",
+          "unit_weight": 0.65,
+          "updated": "2024-06-24 09:38:48.119Z",
+          "amount_requested": 3
+        }
+      ]
+    },
+    {
+      "id": "ChIJka6OQG_HBZERhrfznCqjwVE",
+      "description": "Cafetería San Oxapampino, Jirón Ica, Lima",
+      "main_text": "Cafetería San Oxapampino",
+      "secondary_text": "Jirón Ica, Lima",
+      "formatted_address": "Jirón Ica 281, Lima 15001",
+      "lat": -12.045975,
+      "lng": -77.033923,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-24 09:36:51.028Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "z6e579okz1w5ad0",
+          "name": "Tarrito de leche condensada",
+          "unit_weight": 0.45,
+          "updated": "2024-06-24 09:37:01.426Z",
+          "amount_requested": 2
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:43:30.940Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "uv7la9cstn5ku13",
+          "name": "Barra de manteca",
+          "unit_weight": 0.65,
+          "updated": "2024-06-24 09:38:48.119Z",
+          "amount_requested": 3
+        }
+      ]
+    },
+    {
+      "id": "ChIJ-6dGS17OBZERFqROHUMcyXY",
+      "description": "Panadería D'Julia, Avenida Santiago Antunez de Mayolo, Los Olivos",
+      "main_text": "Panadería D'Julia",
+      "secondary_text": "Avenida Santiago Antunez de Mayolo, Los Olivos",
+      "formatted_address": "Av. Santiago Antunez de Mayolo 1223, Los Olivos 15301",
+      "lat": -11.9954017,
+      "lng": -77.0776899,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:44:32.643Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "bf6lzhzgwrj0j6z",
+          "name": "Bolsa de crema de leche de 1L",
+          "unit_weight": 1,
+          "updated": "2024-06-23 18:44:32.643Z",
+          "amount_requested": 2
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:40:22.013Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "xxlybpbmq33q43j",
+          "name": "Six-pack de leche entera",
+          "unit_weight": 3.2,
+          "updated": "2024-06-23 18:40:22.013Z",
+          "amount_requested": 3
+        }
+      ]
+    },
+    {
+      "id": "ChIJRQ1cS6DOBZERVQT10cDNxaI",
+      "description": "Panadería Joel, Av. Perú, Callao",
+      "main_text": "Panadería Joel",
+      "secondary_text": "Av. Perú, Callao",
+      "formatted_address": "XVGX+523, Av. Perú 4943, Callao 07041",
+      "lat": -12.0236281,
+      "lng": -77.0995981,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:40:22.013Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "xxlybpbmq33q43j",
+          "name": "Six-pack de leche entera",
+          "unit_weight": 3.2,
+          "updated": "2024-06-23 18:40:22.013Z",
+          "amount_requested": 5
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-24 09:36:51.028Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "z6e579okz1w5ad0",
+          "name": "Tarrito de leche condensada",
+          "unit_weight": 0.45,
+          "updated": "2024-06-24 09:37:01.426Z",
+          "amount_requested": 9
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:43:30.940Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "uv7la9cstn5ku13",
+          "name": "Barra de manteca",
+          "unit_weight": 0.65,
+          "updated": "2024-06-24 09:38:48.119Z",
+          "amount_requested": 8
+        }
+      ]
+    },
+    {
+      "id": "ChIJ76cHC1rOBZERyGIsY7RxQHU",
+      "description": "Cafeteria Blanquita, Lima",
+      "main_text": "Cafeteria Blanquita",
+      "secondary_text": "Lima",
+      "formatted_address": "Luis Alva 689 Mercurio Los Olivos, Lima 15301",
+      "lat": -11.9909658,
+      "lng": -77.0681614,
+      "products": [
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-24 09:36:51.028Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "z6e579okz1w5ad0",
+          "name": "Tarrito de leche condensada",
+          "unit_weight": 0.45,
+          "updated": "2024-06-24 09:37:01.426Z",
+          "amount_requested": 2
+        },
+        {
+          "collectionId": "m9zpbwo6ruqznla",
+          "collectionName": "products",
+          "created": "2024-06-23 18:40:58.243Z",
+          "depot": "8066zvg1fm0j4ks",
+          "id": "pshtzcnoacyifzg",
+          "name": "Botella de yogurt de 0.5L",
+          "unit_weight": 0.5,
+          "updated": "2024-06-24 09:45:56.268Z",
+          "amount_requested": 3
+        }
+      ]
+    }
+  ]
+}

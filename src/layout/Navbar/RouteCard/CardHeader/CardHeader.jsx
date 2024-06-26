@@ -20,7 +20,7 @@ import {
 
 import classes from './CardHeader.module.css'
 
-const CardHeader = (route) => {
+const CardHeader = ({ onClick, ...route }) => {
   const [hover, setHover] = useState(false)
 
   return (
@@ -29,7 +29,7 @@ const CardHeader = (route) => {
       component={UnstyledButton} 
       p="md" 
       onClick={() => {
-        route.onClick()
+        onClick()
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -60,7 +60,7 @@ const CardHeader = (route) => {
           <Group gap="xs">
             <IconTruckDelivery size={rem(14)} />
             <Text size={rem(12)}>
-              {route.vehicle?.name}
+              {route.vehicle_name}
             </Text>
           </Group>
           <Group gap="xs">
@@ -74,13 +74,13 @@ const CardHeader = (route) => {
           <Group gap="xs">
             <IconUsersGroup size={rem(14)} />
             <Text size={rem(12)}>
-              {route.total_clients} clientes
+              {route.clients.length} clientes
             </Text>
           </Group>
           <Group gap="xs">
             <IconClockHour3 size={rem(14)} />
             <Text size={rem(12)}>
-              {route.estimated_total_duration} horas
+              {route.total_duration} horas
             </Text>
           </Group>
         </Stack>

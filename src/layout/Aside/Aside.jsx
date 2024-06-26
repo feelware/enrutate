@@ -22,6 +22,8 @@ import useProcess from '../../store/useProcess'
 import useNewPlan from '../../store/useNewPlan'
 import useGUI from '../../store/useGUI'
 
+// import { generatePlan } from '../../services/plans'
+
 const iconStyles = {
   style: {
     width: rem(18),
@@ -35,6 +37,7 @@ const Aside = () => {
   } = useProcess()
 
   const newPlan = useNewPlan()
+  const clients = Array.from(newPlan.clients.values()).reverse()
 
   const { restoreNavOpened } = useGUI()
   
@@ -43,8 +46,17 @@ const Aside = () => {
   const prevStep = () => {
     setActive((current) => Math.max(0, current - 1))
   }
-  const nextStep = () => {
-    if (active === 2) {
+  const nextStep = async () => {
+    if (active === 1) {
+      const finishedPlan = {
+        title: newPlan.title,
+        description: newPlan.description,
+        startDate: newPlan.startDate,
+        clients: clients,
+      }
+      console.log(finishedPlan)
+      // const res = await generatePlan(finishedPlan)
+      // console.log(res)
       setActive(0)
       restoreNavOpened()
       setIsViewing(true)
@@ -61,7 +73,6 @@ const Aside = () => {
           && newPlan.description !== ''
         )
       case 1: {
-        const clients = Array.from(newPlan.clients.values())
         return (
           clients.length 
           && clients.every(client => client.products.length)
@@ -75,7 +86,11 @@ const Aside = () => {
       case 0:
         return <GeneralInfo />
       case 1:
-        return <AddClients />
+        return <AddClients 
+          allClients={clients}
+          onClientUpdate={newPlan.updateClient}
+          onClientRemove={newPlan.removeClient} 
+        />
     }
   }
 

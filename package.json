@@ -20,7 +20,6 @@
     "axios-retry": "^4.4.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^7.1.0",
-    "json-server": "^1.0.0-beta.0",
     "pocketbase": "^0.21.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

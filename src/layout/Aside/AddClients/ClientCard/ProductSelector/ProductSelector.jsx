@@ -31,7 +31,7 @@ const ProductSelector = ({
   const newProducts = useMap(clientCurrentProducts.map(
     (product) => [product.id, product]
   ))
-  const newProductsList = Array.from(newProducts.values())
+  const newProductsList = Array.from(newProducts.values()).reverse()
 
   return (
     <Stack

@@ -59,6 +59,7 @@ const ClientCard = ({
             onClose={popoverHandlers.close}
             position='left-start'
             ref={popoverRef}
+            shadow='xl'
           >
             <Popover.Target>
               <ActionIcon 

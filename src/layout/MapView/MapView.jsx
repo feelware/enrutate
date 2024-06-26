@@ -21,15 +21,14 @@ const MapView = () => {
 
   if (isViewing) {
     viewingPlan?.routes.forEach(r =>
-      r.waypoints
-      .filter(w => w.client)
-      .forEach(w => (
+      r.clients
+      .forEach(client => (
         markers.push(
           <Marker
-            key={w.id}
+            key={client.id}
             position={{
-              lat: w.client.lat,
-              lng: w.client.lng
+              lat: client.lat,
+              lng: client.lng
             }} 
           />
         )

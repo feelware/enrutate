@@ -21,27 +21,26 @@ import { useState } from 'react'
 import PlacesSearchBar from '../../../components/PlacesSearchBar/'
 import ClientCard from './ClientCard/'
 
-import useNewPlan from '../../../store/useNewPlan'
-
 const selectProps = {
   variant: 'unstyled',
   leftSection: <IconSearch size={13} />,
 }
 
-const AddClients = () => {
-  const [clientFilter, setClientFilter] = useState('')
+const AddClients = ({ 
+  allClients,
+  onClientUpdate,
+  onClientRemove
+}) => {
+  const [filterQuery, setFilterQuery] = useState('')
   const [submitState, setSubmitState] = useState({
     status: 'idle',
     failHandler: null
   })
-  
-  const newPlan = useNewPlan()
-  const unfilteredClients = Array.from(newPlan.clients.values())
 
-  const clients = unfilteredClients.filter(client => {
+  const filteredClients = allClients.filter(client => {
     return (
       !([client.main_text, client.formatted_address].every(field =>
-        !(field.toLowerCase().includes(clientFilter.toLowerCase()))
+        !(field.toLowerCase().includes(filterQuery.toLowerCase()))
       ))
     )
   })
@@ -53,7 +52,7 @@ const AddClients = () => {
       </Title>
       <Group justify='space-between' align='flex-end'>
         <PlacesSearchBar 
-          onSubmit={(newClient) => newPlan.updateClient({ ...newClient, products: [] })}
+          onSubmit={(newClient) => onClientUpdate({ ...newClient, products: [] })}
           setSubmitState={setSubmitState}
           w={350}
         />
@@ -66,8 +65,8 @@ const AddClients = () => {
           {...selectProps} 
           placeholder='Filtrar por nombre o dirección'
           styles={{ input: { fontSize: 13 } }}
-          value={clientFilter}
-          onChange={e => setClientFilter(e.currentTarget.value)}
+          value={filterQuery}
+          onChange={e => setFilterQuery(e.currentTarget.value)}
         />
         <ScrollArea 
           h='calc(100vh - 380px)'
@@ -76,7 +75,7 @@ const AddClients = () => {
           bg='var(--mantine-color-dark-8)'
         >
         {
-          clients.length || submitState.status !== 'idle'
+          filteredClients.length || submitState.status !== 'idle'
           ? <Stack 
             gap={8}
             py={8}
@@ -109,12 +108,12 @@ const AddClients = () => {
             </Card>
           }
           {
-            clients.map(client => (
+            filteredClients.map(client => (
               <ClientCard
                 key={client.id} 
                 client={client}
-                onUpdate={(updatedClient) => newPlan.updateClient(updatedClient)}
-                onDelete={() => newPlan.removeClient(client.id)}
+                onUpdate={(updatedClient) => onClientUpdate(updatedClient)}
+                onDelete={() => onClientRemove(client.id)}
               />
             ))
           }
@@ -122,7 +121,7 @@ const AddClients = () => {
           : <Center pt='lg'>
             <Text size={rem(13)} c='dimmed'>
               {
-                clientFilter === ''
+                filterQuery === ''
                 ? 'Añade un cliente para comenzar'
                 : 'No se encontraron resultados'
               }

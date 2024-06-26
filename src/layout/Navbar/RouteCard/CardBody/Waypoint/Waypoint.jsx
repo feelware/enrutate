@@ -20,13 +20,9 @@ import {
 
 import OrdersList from './OrdersList'
 
-import useUserStore from '../../../../../store/useUserStore'
-
-const Waypoint = ({ waypoint }) => {
-  const { depot } = useUserStore()
+const Waypoint = ({ client }) => {
   const [hover, setHover] = useState(false)
   const [opened, { close, toggle }] = useDisclosure(false)
-  const client = waypoint.client
 
   return (
     <Timeline.Item
@@ -39,10 +35,10 @@ const Waypoint = ({ waypoint }) => {
         >
           <Stack gap={rem(8)} >
             <Text size={rem(13)} fw={500}>
-              {client?.name || 'Almacén'}
+              {client?.main_text || 'Almacén'}
             </Text>
             <Text c="dimmed" size={rem(12)}>
-              {client?.address || depot.address }
+              {client.formatted_address}
             </Text>
           </Stack>
           <Popover 
@@ -88,7 +84,7 @@ const Waypoint = ({ waypoint }) => {
               }
               </Transition>
             <Popover.Dropdown w={250}>
-              <OrdersList orders={waypoint.orders} onClose={close} />
+              <OrdersList products={client.products} onClose={close} />
             </Popover.Dropdown>
           </Popover>
         </Flex>

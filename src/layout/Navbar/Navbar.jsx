@@ -66,7 +66,9 @@ const Navbar = () => {
     {
       viewingPlan && <>
         <Stack gap={5} pr={25} pl={25} pt={75}>
-          <Title order={3}>{viewingPlan.name}</Title>
+          <Title order={3} w={250} lineClamp={1}>
+            {viewingPlan.title}
+          </Title>
           <ScrollArea mb={10} h={20}>
             <Text size="xs" >
               {viewingPlan.description}
