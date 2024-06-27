@@ -10,6 +10,7 @@ import Navbar from './layout/Navbar'
 import MapView from './layout/MapView'
 import Aside from './layout/Aside'
 
+import Plans from './layout/floating/Plans'
 import Settings from './layout/floating/Settings'
 import NavToggle from './layout/floating/NavToggle'
 import CreatePlanButton from './layout/floating/CreatePlanButton'
@@ -56,6 +57,7 @@ const App = () => {
         {/* Floating elements */}
         {isViewing && <NavToggle />}
         <CreatePlanButton />
+        {!isAppLoading && <Plans />}
         <Settings />
 
         <AppShell.Navbar>

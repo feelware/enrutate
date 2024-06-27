@@ -10,6 +10,8 @@ import {
 
 import { useScrollIntoView } from '@mantine/hooks'
 
+import { useLocation } from 'wouter'
+
 import {
   IconDownload,
   IconShare,
@@ -27,6 +29,7 @@ import classes from './Navbar.module.css'
 
 const Navbar = () => {
   const { viewingPlan } = useViewingPlan()
+  const [, setLocation] = useLocation()
   const { scrollIntoView, targetRef, scrollableRef } = useScrollIntoView()
   
   const Option = ({ label, Icon, onClick }) => (
@@ -57,19 +60,19 @@ const Navbar = () => {
     {
       label: 'Ver todos mis planes',
       Icon: IconHome,
-      onClick: () => console.log('Back')
+      onClick: () => setLocation('/plans')
     },
   ]
 
   return (
-    <Stack justify="space-between" className={classes.navbar}>
+    <Stack gap={0} justify="space-between" className={classes.navbar}>
     {
       viewingPlan && <>
         <Stack gap={5} pr={25} pl={25} pt={75}>
           <Title order={3} w={250} lineClamp={1}>
             {viewingPlan.title}
           </Title>
-          <ScrollArea mb={10} h={20}>
+          <ScrollArea mb={10} h={40}>
             <Text size="xs" >
               {viewingPlan.description}
             </Text>

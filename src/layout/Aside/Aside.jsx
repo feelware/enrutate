@@ -74,7 +74,7 @@ const Aside = () => {
         )
       case 1: {
         return (
-          clients.length 
+          clients.length > 1
           && clients.every(client => client.products.length)
         )
       }

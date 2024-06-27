@@ -8,11 +8,6 @@ import {
   rem
 } from '@mantine/core'
 
-import { 
-  useDisclosure,
-  useClickOutside
-} from '@mantine/hooks'
-
 import {
   IconShoppingCart
 } from '@tabler/icons-react'
@@ -20,9 +15,6 @@ import {
 import OrdersList from './OrdersList'
 
 const Waypoint = ({ client }) => {
-  const [opened, { close, toggle }] = useDisclosure(false)
-  const ref = useClickOutside(() => close())
-
   return (
     <Timeline.Item
       title={
@@ -47,16 +39,13 @@ const Waypoint = ({ client }) => {
             position="right-start" 
             shadow="md"
             offset={50}
-            opened={opened}
           >
             <Popover.Target>
               <ActionIcon
                 title='Ver pedidos'
                 color='dimmed'
                 variant='transparent'
-                onClick={toggle}
                 flex={1}
-                ref={ref}
               >
                 <IconShoppingCart size={15} />
               </ActionIcon>

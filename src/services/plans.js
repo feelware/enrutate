@@ -17,6 +17,8 @@ export const generatePlan = async (data) => {
 
 export const getPlans = () => plans
 
+export const findPlan = (id) => plans.find(p => p.id === id)
+
 export const deletePlan = async (id) => {
   await pb.collection('plans').delete(id)
   plans = plans.filter(p => p.id !== id)

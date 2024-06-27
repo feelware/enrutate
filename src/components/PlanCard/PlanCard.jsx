@@ -1,8 +1,17 @@
-import { Card, Flex, Image, Text, Group, Center, Button, ActionIcon } from '@mantine/core';
-import { Carousel } from '@mantine/carousel';
-import { IconCalendarTime, IconUsers, IconTruck, IconDots } from '@tabler/icons-react';
+import { 
+  Card,
+  Flex,
+  Image,
+  Text,
+  Group,
+  Center,
+  Button,
+  ActionIcon 
+} from '@mantine/core'
+import { Carousel } from '@mantine/carousel'
+import { IconCalendarTime, IconUsers, IconTruck, IconDots } from '@tabler/icons-react'
 import { useLocation } from 'wouter'
-import classes from './PlanCard.module.css';
+import classes from './PlanCard.module.css'
 
 const Feature = ({ label, icon: Icon }) => (
   <Center key={label}>
@@ -17,7 +26,7 @@ const images = [
   'https://images.unsplash.com/photo-1605774337664-7a846e9cdf17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80',
   'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80',
   'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80',
-];
+]
 
 export function PlanCard({ plan }) {
   const [, setLocation] = useLocation()
@@ -32,7 +41,7 @@ export function PlanCard({ plan }) {
     <Carousel.Slide key={image}>
       <Image src={image} height={220} />
     </Carousel.Slide>
-  ));
+  ))
 
   return (
     <Card withBorder radius="md" className={classes.card} style={{ width: 300 }}>
@@ -85,5 +94,5 @@ export function PlanCard({ plan }) {
         </Button>
       </Card.Section>
     </Card>
-  );
+  )
 }

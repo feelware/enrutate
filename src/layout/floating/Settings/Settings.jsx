@@ -31,7 +31,6 @@ const Settings = () => {
   const [activeSection, setActiveSection] = useState('general')
   const [opened] = useRoute('/settings')
   const [, setLocation] = useLocation()
-
   const [authUser, setAuthUser] = useState(getAuthUser())
   const [depot, setDepot] = useState(getDepot())
 
