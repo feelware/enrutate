@@ -19,10 +19,11 @@ import {
 
 import { useLocation } from 'wouter'
 
-import toEsDate from '../../../../utils/toEsDate'
+import toEsDate from '../../../../../utils/toEsDate'
 
 const PlanCard = ({ 
   plan,
+  onClose
 }) => {
   const [, setLocation] = useLocation()
 
@@ -72,7 +73,10 @@ const PlanCard = ({
         >
           <Button
             variant='default'
-            onClick={() => setLocation(`/plan/${plan.id}`)}
+            onClick={() => {
+              setLocation(`/plan/${plan.id}`)
+              onClose()
+            }}
           >
             Abrir
           </Button>

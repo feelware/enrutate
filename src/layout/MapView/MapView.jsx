@@ -1,53 +1,17 @@
 import { 
   APIProvider, 
   Map,
-  Marker
+  Marker,
 } from '@vis.gl/react-google-maps'
 
-import useProcess from '../../store/useProcess'
-import useViewingPlan from '../../store/useViewingPlan'
-import useNewPlan from '../../store/useNewPlan'
 import useGUI from '../../store/useGUI'
+import useMarkers from './useMarkers'
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 
 const MapView = () => {
   const { setMapLoading } = useGUI()
-  const { isViewing } = useProcess()
-  const { viewingPlan } = useViewingPlan()
-  const newPlan = useNewPlan()
-
-  const markers = []
-
-  if (isViewing) {
-    viewingPlan?.routes.forEach(r =>
-      r.clients
-      .forEach(client => (
-        markers.push(
-          <Marker
-            key={client.id}
-            position={{
-              lat: client.lat,
-              lng: client.lng
-            }} 
-          />
-        )
-      ))
-    )
-  }
-  else {
-    newPlan?.clients.forEach(client => 
-      markers.push(
-        <Marker
-          key={client.id}
-          position={{
-            lat: client.lat,
-            lng: client.lng
-          }}
-        />
-      )
-    )
-  }
+  const markers = useMarkers()
 
   return (
     <APIProvider 
@@ -65,9 +29,13 @@ const MapView = () => {
         gestureHandling={'greedy'}
         disableDefaultUI={true}
         onClick={(e) => console.log(e.detail.latLng)}
-        
       >
-        {markers}
+        {markers.map(marker => (
+          <Marker
+            key={marker.id}
+            {...marker}
+          />
+        ))}
       </Map>
     </APIProvider>
   )

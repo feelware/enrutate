@@ -5,9 +5,10 @@ import {
   Stack,
   Text,
   UnstyledButton,
+  SimpleGrid,
   Transition,
   Center,
-  rem
+  ColorSwatch,
 } from '@mantine/core'
 
 import {
@@ -18,73 +19,78 @@ import {
   IconChevronDown
 } from '@tabler/icons-react'
 
-import classes from './CardHeader.module.css'
+const Stat = ({ Icon, label }) => (
+  <Group gap="xs">
+    <Icon size={12} />
+    <Text size='xs'>
+      {label}
+    </Text>
+  </Group>
+)
 
-const CardHeader = ({ onClick, ...route }) => {
+const CardHeader = ({ bodyToggle, ...route }) => {
   const [hover, setHover] = useState(false)
 
+  const stats = [
+    {
+      Icon: IconTruckDelivery,
+      label: route.vehicle_name
+    },
+    {
+      Icon: IconRoute,
+      label: `${route.total_distance} km`
+    },
+    {
+      Icon: IconUsersGroup,
+      label: `${route.clients.length} clientes`
+    },
+    {
+      Icon: IconClockHour3,
+      label: `${route.total_duration} horas`
+    }
+  ]
+
   return (
-    <Stack 
-      className={classes.header} 
+    <Stack
+      p='lg'
+      bg={hover ? 'light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5))' : ''}
       component={UnstyledButton} 
-      p="md" 
-      onClick={() => {
-        onClick()
-      }}
+      onClick={bodyToggle}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <Group justify='space-between' >
-        <Text size={rem(13)} fw={500}>
-          Ruta {route.index + 1}
-        </Text>
-        <Center h={rem(22)}>
-          <Transition
-            mounted={hover}
-            transition="fade"
+      <Group justify='space-between'>
+        <Group gap={9} my={5}>
+          <ColorSwatch size={7} color='var(--mantine-color-blue-3)' />
+          <Text size='xs' fw={700} lh={0}>
+            Ruta {route.index + 1}
+          </Text>
+        </Group>
+        <Transition
+          mounted={hover}
+          transition="fade"
+        >
+        {
+          (styles) => <Center
+            style={{
+            ...styles
+            }}
           >
-          {
-            (styles) => <div style={{
-              ...styles, margin: 0
-            }}>
-              <IconChevronDown size={rem(14)} />
-            </div>
-          }
-          </Transition>
-        </Center>
-        
-        
+            <IconChevronDown size={13} />
+          </Center>
+        }
+        </Transition>
       </Group>
-      <Group grow>
-        <Stack gap="xs">
-          <Group gap="xs">
-            <IconTruckDelivery size={rem(14)} />
-            <Text size={rem(12)}>
-              {route.vehicle_name}
-            </Text>
-          </Group>
-          <Group gap="xs">
-            <IconRoute size={rem(14)} />
-            <Text size={rem(12)}>
-              {route.total_distance} km
-            </Text>
-          </Group>
-        </Stack>
-        <Stack gap="xs">
-          <Group gap="xs">
-            <IconUsersGroup size={rem(14)} />
-            <Text size={rem(12)}>
-              {route.clients.length} clientes
-            </Text>
-          </Group>
-          <Group gap="xs">
-            <IconClockHour3 size={rem(14)} />
-            <Text size={rem(12)}>
-              {route.total_duration} horas
-            </Text>
-          </Group>
-        </Stack>
-      </Group>
+      <SimpleGrid 
+        cols={2}
+        verticalSpacing='xs'
+      >
+      {
+        stats.map(stat => (
+          <Stat key={stat.label} {...stat} />
+        ))
+      }
+      </SimpleGrid>
     </Stack>
   )
 }

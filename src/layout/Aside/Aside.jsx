@@ -18,9 +18,10 @@ import {
 import GeneralInfo from './GeneralInfo'
 import AddClients from './AddClients'
 
-import useProcess from '../../store/useProcess'
+import useViewingPlan from '../../store/useViewingPlan'
 import useNewPlan from '../../store/useNewPlan'
 import useGUI from '../../store/useGUI'
+import { useLocation } from 'wouter'
 
 // import { generatePlan } from '../../services/plans'
 
@@ -32,34 +33,30 @@ const iconStyles = {
 }
 
 const Aside = () => {
-  const {
-    setIsViewing,
-  } = useProcess()
-
+  const [, setLocation] = useLocation()
   const newPlan = useNewPlan()
-  const clients = Array.from(newPlan.clients.values()).reverse()
-
+  const { viewingPlan } = useViewingPlan()
   const { restoreNavOpened } = useGUI()
-  
   const [active, setActive] = useState(0)
+
+  const clients = newPlan.clients
 
   const prevStep = () => {
     setActive((current) => Math.max(0, current - 1))
   }
   const nextStep = async () => {
     if (active === 1) {
-      const finishedPlan = {
+      const planToPost = {
         title: newPlan.title,
         description: newPlan.description,
         startDate: newPlan.startDate,
-        clients: clients,
+        clients: newPlan.clients
       }
-      console.log(finishedPlan)
-      // const res = await generatePlan(finishedPlan)
-      // console.log(res)
+      console.log(planToPost)
+      const newLocation = viewingPlan ? `/plan/${viewingPlan.id}` : '/'
+      setLocation(newLocation)
       setActive(0)
       restoreNavOpened()
-      setIsViewing(true)
       return
     }
     setActive((current) => current + 1)
@@ -88,6 +85,7 @@ const Aside = () => {
       case 1:
         return <AddClients 
           allClients={clients}
+          onClientAdd={newPlan.addClient}
           onClientUpdate={newPlan.updateClient}
           onClientRemove={newPlan.removeClient} 
         />
@@ -97,7 +95,6 @@ const Aside = () => {
   return (
     <Stack 
       p={20}
-      mt={60}
       h='100vh'
     >
       <Stepper

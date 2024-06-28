@@ -4,21 +4,22 @@ import {
 
 import Waypoint from './Waypoint'
 
-import classes from './CardBody.module.css'
-
 const CardBody = (route) => {
   return (
     <Timeline
-      className={classes.content} 
       py={20}
       px={25}
-      pr={20}
-      bulletSize={16} 
+      bulletSize={12} 
       lineWidth={2}
     >
     {
       route.clients.map(client => (
-        <Waypoint key={client.id} client={client} />
+        <Waypoint 
+          key={client.id} 
+          name={client.main_text}
+          address={client.formatted_address}
+          products={client.products} 
+        />
       ))
     }
     </Timeline>

@@ -23,14 +23,11 @@ import {
   getDepot,
   updateAuthUser,
   updateDepot
-} from '../../../services/authUser'
+} from '../../../../services/authUser'
 
-import { useLocation, useRoute } from 'wouter'
 
-const Settings = () => {
+const Settings = ({ opened, onClose }) => {
   const [activeSection, setActiveSection] = useState('general')
-  const [opened] = useRoute('/settings')
-  const [, setLocation] = useLocation()
   const [authUser, setAuthUser] = useState(getAuthUser())
   const [depot, setDepot] = useState(getDepot())
 
@@ -55,7 +52,7 @@ const Settings = () => {
       <Modal
         opened={opened}
         onClose={() => {
-          setLocation('/')
+          onClose()
           generalForm.reset()
         }}
         withCloseButton={true}

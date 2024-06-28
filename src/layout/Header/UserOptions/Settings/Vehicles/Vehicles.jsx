@@ -1,11 +1,11 @@
-import CrudTable from "../../../../components/CrudTable"
+import CrudTable from "../../../../../components/CrudTable"
 
 import {
   getVehicles,
   createVehicle,
   updateVehicle,
   deleteVehicle,
-} from "../../../../services/vehicles"
+} from "../../../../../services/vehicles"
 
 import { useState } from "react"
 import { isInRange } from '@mantine/form'

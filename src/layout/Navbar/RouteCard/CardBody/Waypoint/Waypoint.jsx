@@ -5,8 +5,11 @@ import {
   Group,
   ActionIcon,
   Popover,
-  rem
+  Center,
+  Transition,
 } from '@mantine/core'
+
+import { useHover } from '@mantine/hooks'
 
 import {
   IconShoppingCart
@@ -14,58 +17,96 @@ import {
 
 import OrdersList from './OrdersList'
 
-const Waypoint = ({ client }) => {
-  return (
-    <Timeline.Item
-      title={
-        <Group
-          gap={30}
-          grow
-          preventGrowOverflow={false}
+const Label = ({ name, address }) => (
+  <Stack 
+    gap={4}
+    flex={10}
+    mt={-3}
+  >
+    <Text 
+      size='xs' 
+      fw={500}
+    >
+      {name}
+    </Text>
+    <Text 
+      c="dimmed" 
+      size='xs'
+    >
+      {address}
+    </Text>
+  </Stack>
+)
+
+const OrdersButton = ({ products, visible }) => (
+  <Popover 
+    width={200} 
+    position="right-start" 
+    shadow="md"
+    offset={50}
+  >
+    <Popover.Target>
+      <ActionIcon
+        title='Ver pedidos'
+        variant='transparent'
+        c='dimmed'
+        size={15}
+      >
+        <Transition
+          mounted={visible}
+          transition="fade"
         >
-          <Stack 
-            gap={rem(8)}
-            flex={8}
-          >
-            <Text size={rem(13)} fw={500}>
-              {client?.main_text || 'Almacén'}
-            </Text>
-            <Text c="dimmed" size={rem(12)}>
-              {client.formatted_address}
-            </Text>
-          </Stack>
-          <Popover 
-            width={200} 
-            position="right-start" 
-            shadow="md"
-            offset={50}
-          >
-            <Popover.Target>
-              <ActionIcon
-                title='Ver pedidos'
-                color='dimmed'
-                variant='transparent'
-                flex={1}
-              >
-                <IconShoppingCart size={15} />
-              </ActionIcon>
-            </Popover.Target>
-            <Popover.Dropdown 
-              w={250}
-              mah={300}
-              p={0}
+        {
+          (styles) => (
+            <Center
               style={{
-                overflowY: 'auto',
+              ...styles
               }}
             >
-              <OrdersList 
-                products={client.products} 
-                onClose={close} 
-              />
-            </Popover.Dropdown>
-          </Popover>
+              <IconShoppingCart size={15} />
+            </Center>
+          )
+        }
+        </Transition>
+      </ActionIcon>
+    </Popover.Target>
+    <Popover.Dropdown 
+      w={250}
+      mah={300}
+      p={0}
+      style={{
+        overflowY: 'auto',
+      }}
+    >
+      <OrdersList 
+        products={products} 
+        onClose={close} 
+      />
+    </Popover.Dropdown>
+  </Popover> 
+)
+
+const Waypoint = ({ name, address, products }) => {
+  const { hovered, ref } = useHover()
+
+  return (
+    <Timeline.Item
+      title={(
+        <Group
+          gap={30}
+          preventGrowOverflow={false}
+          ref={ref}
+        >
+          <Label 
+            name={name}
+            address={address}
+          />
+          <OrdersButton 
+            products={products}
+            visible={hovered}
+          />
         </Group>
-      }
+      )}
       bullet={<></>}
     />
   )

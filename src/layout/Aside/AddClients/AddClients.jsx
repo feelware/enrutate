@@ -28,6 +28,7 @@ const selectProps = {
 
 const AddClients = ({ 
   allClients,
+  onClientAdd,
   onClientUpdate,
   onClientRemove
 }) => {
@@ -52,7 +53,7 @@ const AddClients = ({
       </Title>
       <Group justify='space-between' align='flex-end'>
         <PlacesSearchBar 
-          onSubmit={(newClient) => onClientUpdate({ ...newClient, products: [] })}
+          onSubmit={(newClient) => onClientAdd({ ...newClient, products: [] })}
           setSubmitState={setSubmitState}
           w={350}
         />

@@ -10,15 +10,19 @@ export default create((set, get) => ({
   startDate: new Date(),
   setStartDate: (startDate) => set({ startDate }),
 
-  clients: new Map(),
-  removeClient: (id) => set((state) => {
-    const clients = new Map(state.clients)
-    clients.delete(id)
-    return { clients }
+  clients: [],
+  addClient: (client) => set((state) => {
+    if (!state.clients.find(c => c.id === client.id)) {
+      const clients = [ client, ...state.clients ]
+      return { clients }
+    }
   }),
   updateClient: (client) => set((state) => {
-    const clients = new Map(state.clients)
-    clients.set(client.id, client)
+    const clients = state.clients.map(c => c.id === client.id ? client : c)
+    return { clients }
+  }),
+  removeClient: (id) => set((state) => {
+    const clients = state.clients.filter(c => c.id !== id)
     return { clients }
   }),
 
